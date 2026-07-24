@@ -34,6 +34,16 @@
 
   /* shadow */
   --shadow-menu: 0 10px 28px rgba(0, 0, 0, .22);
+
+  /* status text colors — fixed palette, do not improvise new statuses off-palette */
+  --c-status-green: #417505;      /* Active, Approved, Live, Paid, Completed, Sent, Sold */
+  --c-status-yellow: #8f5800;     /* Pending, Open, Assigned, Approved-Awaiting Payment, Awaiting Application, Generated, Collecting */
+  --c-status-red: #cd2026;        /* Rejected, Denied, Cancelled, Past Due, Terminated */
+  --c-status-dark-red: #80252a;   /* Expired, Revoked, Withdrawn, Decommissioned, Retired, Exported */
+  --c-status-cool-blue: #205493;  /* In Progress, Rejected for Resubmission, In Cart, Submitted, Ready for Review */
+  --c-status-warm-orange: #a34900; /* On Hold, Suspended, Payment in Process, Inactive */
+  --c-status-draft-blue: #13669a; /* In Review, Draft, Initiated */
+  --c-status-gray: #5c5f66;       /* Archived, Closed */
 }
 
 /* ---------------------------------------------------------------------- */
@@ -645,4 +655,580 @@ button {
 
 .settings-tiles {
   flex: 1;
+}
+
+/* ---------------------------------------------------------------------- */
+/* List / detail page shell — shared by Queues, My Tasks, Applications…  */
+/* ---------------------------------------------------------------------- */
+
+.page-body {
+  padding: 26px 32px 40px;
+  min-height: 640px;
+}
+
+/* Breadcrumb */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb__item:not(:last-child)::after {
+  content: '\203A';
+  color: var(--c-text-secondary);
+}
+
+.breadcrumb a {
+  text-decoration: none;
+}
+
+.breadcrumb__current {
+  color: var(--c-text-secondary);
+  font-weight: 600;
+}
+
+/* Page title (underlined) */
+
+.page-title {
+  margin: 16px 0 0;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--c-border);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--c-text-primary);
+}
+
+/* Accordion (Icon Key) */
+
+.accordion {
+  margin-top: 20px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+}
+
+.accordion__button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-text-primary);
+  background: var(--c-tile-bg);
+  text-align: left;
+}
+
+.accordion__button i {
+  font-size: 14px;
+  color: var(--c-text-secondary);
+  transition: transform .15s;
+}
+
+.accordion__button[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.accordion__content {
+  padding: 18px 20px;
+  border-top: 1px solid var(--c-border);
+}
+
+.accordion__content[hidden] {
+  display: none;
+}
+
+.accordion__content-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-text-primary);
+  margin-bottom: 12px;
+}
+
+.icon-key-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 24px;
+}
+
+.icon-key-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--c-text-secondary);
+}
+
+.icon-key-item img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Filter tabs (segmented) — same visual pattern as .search-toggle */
+
+.filter-tabs {
+  display: inline-flex;
+  border: 1px solid #c9ccd0;
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.filter-tabs__btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--c-text-primary);
+  background: #fff;
+  border-left: 1px solid #c9ccd0;
+}
+
+.filter-tabs__btn:first-child {
+  border-left: none;
+}
+
+.filter-tabs__btn.is-active {
+  background: var(--c-blue);
+  color: #fff;
+}
+
+/* Form fields (search / filter forms) */
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.field-grid--5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.field-grid + .field-grid {
+  margin-top: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--c-text-primary);
+}
+
+.field select,
+.field input[type="text"],
+.field input[type="date"] {
+  height: 44px;
+  border: 1px solid #c9ccd0;
+  border-radius: var(--r-pill);
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--c-text-primary);
+  background: #fff;
+}
+
+.field select:focus,
+.field input:focus {
+  outline: none;
+  border-color: var(--c-blue);
+  box-shadow: 0 0 0 1px var(--c-blue);
+}
+
+.field-hint {
+  font-size: 16px;
+  color: var(--c-text-secondary);
+}
+
+.field-required {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--c-text-primary);
+  margin-left: 6px;
+}
+
+.help-text {
+  font-size: 16px;
+  color: var(--c-text-secondary);
+  line-height: 1.5;
+}
+
+/* Radio group (fieldset legend + inline options) */
+
+.fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fieldset legend {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--c-text-primary);
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--c-text-primary);
+  cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--c-blue);
+  margin: 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  height: 44px;
+  padding: 0 26px;
+  border-radius: var(--r-pill);
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--primary {
+  background: var(--c-blue);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--c-blue-hover);
+}
+
+.btn--secondary {
+  background: #fff;
+  color: var(--c-text-primary);
+  font-weight: 600;
+  border: 1px solid #c9ccd0;
+}
+
+.btn--secondary:hover {
+  border-color: #9ea3a8;
+}
+
+/* Multiselect dropdown (User Group, etc.) */
+
+.multiselect {
+  position: relative;
+}
+
+.multiselect-trigger {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #c9ccd0;
+  border-radius: var(--r-pill);
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--c-text-primary);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.multiselect-trigger:focus-visible {
+  outline: none;
+  border-color: var(--c-blue);
+  box-shadow: 0 0 0 1px var(--c-blue);
+}
+
+.multiselect-trigger-text {
+  color: var(--c-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.multiselect-trigger i {
+  font-size: 14px;
+  color: var(--c-text-secondary);
+  transition: transform .15s;
+  flex: 0 0 auto;
+}
+
+.multiselect-trigger[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.multiselect-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 6px;
+  width: 100%;
+  z-index: 20;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-panel);
+  box-shadow: var(--shadow-menu);
+  padding: 8px;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.multiselect-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--r-pill);
+  font-size: 16px;
+  color: var(--c-text-primary);
+  cursor: pointer;
+}
+
+.multiselect-option:hover {
+  background: var(--c-tile-bg);
+}
+
+.multiselect-option input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--c-blue);
+}
+
+/* Table controls bar */
+
+.table-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.table-controls__count {
+  color: var(--c-text-primary);
+  font-weight: 600;
+}
+
+.table-controls__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c-text-secondary);
+}
+
+.table-controls__right select {
+  height: 36px;
+  border: 1px solid #c9ccd0;
+  border-radius: var(--r-pill);
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--c-text-primary);
+  background: #fff;
+}
+
+/* Data table */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead tr {
+  border-bottom: 2px solid var(--c-border);
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-text-secondary);
+  white-space: nowrap;
+}
+
+.data-table th i {
+  margin-left: 6px;
+  font-size: 12px;
+  color: #9aa1a8;
+}
+
+.data-table td {
+  padding: 14px;
+  border-top: 1px solid var(--c-hairline-2);
+  font-size: 16px;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: var(--c-tile-bg);
+}
+
+.data-table .controls-cell {
+  white-space: nowrap;
+}
+
+/* Status text — fixed 8-color palette. Weight stays normal; color alone carries the meaning. */
+
+.status-text--active,
+.status-text--approved,
+.status-text--live,
+.status-text--paid,
+.status-text--completed,
+.status-text--sent,
+.status-text--sold {
+  color: var(--c-status-green);
+}
+
+.status-text--pending,
+.status-text--open,
+.status-text--assigned,
+.status-text--approved-awaiting-payment,
+.status-text--awaiting-application,
+.status-text--generated,
+.status-text--collecting {
+  color: var(--c-status-yellow);
+}
+
+.status-text--rejected,
+.status-text--denied,
+.status-text--cancelled,
+.status-text--past-due,
+.status-text--terminated {
+  color: var(--c-status-red);
+}
+
+.status-text--expired,
+.status-text--revoked,
+.status-text--withdrawn,
+.status-text--decommissioned,
+.status-text--retired,
+.status-text--exported {
+  color: var(--c-status-dark-red);
+}
+
+.status-text--in-progress,
+.status-text--rejected-for-resubmission,
+.status-text--in-cart,
+.status-text--submitted,
+.status-text--ready-for-review {
+  color: var(--c-status-cool-blue);
+}
+
+.status-text--on-hold,
+.status-text--suspended,
+.status-text--payment-in-process,
+.status-text--inactive {
+  color: var(--c-status-warm-orange);
+}
+
+.status-text--in-review,
+.status-text--draft,
+.status-text--initiated {
+  color: var(--c-status-draft-blue);
+}
+
+.status-text--archived,
+.status-text--closed {
+  color: var(--c-status-gray);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  background: var(--c-tile-bg);
+}
+
+.icon-btn img {
+  display: block;
+}
+
+.empty-state {
+  padding: 48px 20px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--c-text-secondary);
+}
+
+/* Pagination */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+}
+
+.pagination a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: var(--r-pill);
+  font-size: 16px;
+  color: var(--c-text-primary);
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  background: var(--c-tile-bg);
+}
+
+.pagination a.is-current {
+  background: var(--c-blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+.pagination__arrow {
+  color: var(--c-blue);
+  font-weight: 600;
 }

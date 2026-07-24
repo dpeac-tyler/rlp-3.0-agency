@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search — RLP Agency Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header (shared chrome) -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html">
+      <img class="app-header__logo" src="assets/tyler-t.png" alt="Tenant logo">
+      <span class="app-header__brand-name">Name of Tenant</span>
+    </a>
+    <nav class="app-header__links" aria-label="Account">
+      <a href="settings.html">Settings</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="search.html">Search</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Help</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Customizable toolbar (shared chrome, rendered by js/toolbar.js) -->
+  <div id="toolbar"></div>
+
+  <!-- Page content -->
+  <main class="page-body">
+
+    <h1 class="page-title">Search</h1>
+
+    <div class="accordion">
+      <button type="button" class="accordion__button" aria-expanded="false" aria-controls="icon-key-content">
+        Icon Key
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="accordion__content" id="icon-key-content" hidden>
+        <div class="accordion__content-label">Options and Control Types</div>
+        <div class="icon-key-grid">
+          <div class="icon-key-item"><img src="assets/download-certificate.png" alt=""> Download Certificate</div>
+          <div class="icon-key-item"><img src="assets/initiate-inspection.png" alt=""> Initiate Inspection</div>
+          <div class="icon-key-item"><img src="assets/review-task.png" alt=""> Review Task</div>
+          <div class="icon-key-item"><img src="assets/view-applicant-profile.png" alt=""> View Applicant Profile</div>
+          <div class="icon-key-item"><img src="assets/view-submission.png" alt=""> View Submission</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="help-text" style="margin-top: 24px">Use the Search Type options below to choose either Constituent, Invoice, License, or Submission. Then enter your search terms.</p>
+
+    <fieldset class="fieldset" style="margin-top: 24px">
+      <legend>Search Type <span class="field-required">Required</span></legend>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="search-type" value="constituent"> Constituent</label>
+        <label class="radio-option"><input type="radio" name="search-type" value="invoice"> Invoice</label>
+        <label class="radio-option"><input type="radio" name="search-type" value="license"> License</label>
+        <label class="radio-option"><input type="radio" name="search-type" value="submission" checked> Submission</label>
+      </div>
+    </fieldset>
+
+    <p class="help-text" style="margin-top: 24px">Please enter the search category and search terms below.</p>
+
+    <form style="margin-top: 20px" onsubmit="return false;">
+      <div class="field">
+        <label for="constituent-name">Constituent Name</label>
+        <div class="field-hint">Last Name, First Name, Business Name, or DBA Name</div>
+        <input type="text" id="constituent-name" name="constituent-name">
+      </div>
+
+      <div class="field-grid" style="margin-top: 20px">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email">
+        </div>
+        <div class="field">
+          <label for="fein-number">FEIN Number (XX-XXXXXXX)</label>
+          <input type="text" id="fein-number" name="fein-number">
+        </div>
+        <div class="field">
+          <label for="customer-number">Customer Number</label>
+          <input type="text" id="customer-number" name="customer-number">
+        </div>
+      </div>
+
+      <div class="accordion" style="margin-top: 24px">
+        <button type="button" class="accordion__button" aria-expanded="true" aria-controls="additional-criteria-content">
+          Additional Criteria
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="accordion__content" id="additional-criteria-content">
+          <div class="field-grid field-grid--5">
+            <div class="field">
+              <label for="license-number">License Number</label>
+              <input type="text" id="license-number" name="license-number">
+            </div>
+            <div class="field">
+              <label for="license-type">License Type</label>
+              <select id="license-type" name="license-type">
+                <option value="">Please Select</option>
+                <option value="business">Business License</option>
+                <option value="contractor">Contractor License</option>
+                <option value="professional-engineer">Professional Engineer License</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid field-grid--5">
+            <div class="field">
+              <label for="submission-number">Submission Number</label>
+              <input type="text" id="submission-number" name="submission-number">
+            </div>
+            <div class="field">
+              <label for="submission-start-date">Submission Start Date</label>
+              <input type="date" id="submission-start-date" name="submission-start-date">
+            </div>
+            <div class="field">
+              <label for="submission-end-date">Submission End Date</label>
+              <input type="date" id="submission-end-date" name="submission-end-date">
+            </div>
+            <div class="field">
+              <label for="submission-review-status">Submission Review Status</label>
+              <select id="submission-review-status" name="submission-review-status">
+                <option value="">Please Select</option>
+                <option value="approved">Approved</option>
+                <option value="pending">Pending</option>
+                <option value="denied">Denied</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid field-grid--5">
+            <div class="field">
+              <label for="transaction-number">Transaction Number</label>
+              <input type="text" id="transaction-number" name="transaction-number">
+            </div>
+            <div class="field">
+              <label for="application-type">Application Type</label>
+              <select id="application-type" name="application-type">
+                <option value="">Please Select</option>
+                <option value="new">New Application</option>
+                <option value="renewal">Renewal</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="form-number">Form Number</label>
+              <input type="text" id="form-number" name="form-number">
+            </div>
+          </div>
+
+          <div class="field-grid field-grid--5">
+            <div class="field">
+              <label for="physical-address-1">Physical Address Line 1</label>
+              <input type="text" id="physical-address-1" name="physical-address-1">
+            </div>
+            <div class="field">
+              <label for="physical-address-2">Physical Address Line 2</label>
+              <input type="text" id="physical-address-2" name="physical-address-2">
+            </div>
+            <div class="field">
+              <label for="physical-city">Physical City</label>
+              <input type="text" id="physical-city" name="physical-city">
+            </div>
+            <div class="field">
+              <label for="physical-state">Physical State</label>
+              <select id="physical-state" name="physical-state">
+                <option value="">Please Select</option>
+                <option value="ny">New York</option>
+                <option value="nj">New Jersey</option>
+                <option value="ct">Connecticut</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="physical-zip">Physical Zip Code</label>
+              <input type="text" id="physical-zip" name="physical-zip">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn--primary">Search</button>
+        <button type="button" class="btn btn--secondary" id="clear-search">Clear</button>
+      </div>
+    </form>
+
+    <div style="margin-top: 32px">
+      <div class="table-controls">
+        <div class="table-controls__count">Showing 1 - 5 of 5 Entries</div>
+        <div class="table-controls__right">
+          <label for="entries-per-page-search">Show</label>
+          <select id="entries-per-page-search">
+            <option value="100" selected>100</option>
+            <option value="50">50</option>
+            <option value="25">25</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Submission Number <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>License Number <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Customer Number <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Constituent Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Form Number <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submitted Date <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submission Review Status <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Controls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>723456789</td>
+            <td>01234567</td>
+            <td>012345678</td>
+            <td>Sarah Johnson</td>
+            <td>DNR-2024-A</td>
+            <td>03/15/2026</td>
+            <td class="status-text--approved">Approved</td>
+            <td class="controls-cell"><a href="individual-profile.html" class="icon-btn" aria-label="View Applicant Profile"><img src="assets/view-applicant-profile.png" alt="" width="30" height="30"></a></td>
+          </tr>
+          <tr>
+            <td>734567890</td>
+            <td>02345678</td>
+            <td>023456789</td>
+            <td>Michael Chen</td>
+            <td>DNR-2024-B</td>
+            <td>03/16/2026</td>
+            <td class="status-text--pending">Pending</td>
+            <td class="controls-cell"><a href="individual-profile.html" class="icon-btn" aria-label="View Applicant Profile"><img src="assets/view-applicant-profile.png" alt="" width="30" height="30"></a></td>
+          </tr>
+          <tr>
+            <td>745678901</td>
+            <td>03456789</td>
+            <td>034567890</td>
+            <td>Jennifer Williams</td>
+            <td>DNR-2024-C</td>
+            <td>03/17/2026</td>
+            <td class="status-text--denied">Denied</td>
+            <td class="controls-cell"><a href="individual-profile.html" class="icon-btn" aria-label="View Applicant Profile"><img src="assets/view-applicant-profile.png" alt="" width="30" height="30"></a></td>
+          </tr>
+          <tr>
+            <td>756789012</td>
+            <td>04567890</td>
+            <td>045678901</td>
+            <td>David Martinez</td>
+            <td>DNR-2024-D</td>
+            <td>03/18/2026</td>
+            <td class="status-text--approved">Approved</td>
+            <td class="controls-cell"><a href="individual-profile.html" class="icon-btn" aria-label="View Applicant Profile"><img src="assets/view-applicant-profile.png" alt="" width="30" height="30"></a></td>
+          </tr>
+          <tr>
+            <td>767890123</td>
+            <td>05678901</td>
+            <td>056789012</td>
+            <td>Emily Brown</td>
+            <td>DNR-2024-E</td>
+            <td>03/19/2026</td>
+            <td class="status-text--pending">Pending</td>
+            <td class="controls-cell"><a href="individual-profile.html" class="icon-btn" aria-label="View Applicant Profile"><img src="assets/view-applicant-profile.png" alt="" width="30" height="30"></a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav aria-label="Pagination">
+        <ul class="pagination">
+          <li><a href="#" class="pagination__arrow" aria-label="Previous page">‹ Previous</a></li>
+          <li><a href="#" class="is-current" aria-label="Page 1" aria-current="page">1</a></li>
+          <li><a href="#" aria-label="Page 2">2</a></li>
+          <li><a href="#" aria-label="Page 3">3</a></li>
+          <li><a href="#" aria-label="Page 4">4</a></li>
+          <li><a href="#" aria-label="Page 5">5</a></li>
+          <li><a href="#" class="pagination__arrow" aria-label="Next page">Next ›</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="js/toolbar.js"></script>
+<script>
+  initToolbar('#toolbar', { activeKey: null });
+
+  // Accordions (Icon Key + Additional Criteria)
+  document.querySelectorAll('.accordion__button').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var expanded = button.getAttribute('aria-expanded') === 'true';
+      var content = document.getElementById(button.getAttribute('aria-controls'));
+      button.setAttribute('aria-expanded', String(!expanded));
+      content.hidden = expanded;
+    });
+  });
+
+  document.getElementById('clear-search').addEventListener('click', function () {
+    document.querySelectorAll('input[type="text"], input[type="date"]').forEach(function (input) { input.value = ''; });
+    document.querySelectorAll('select').forEach(function (select) { select.selectedIndex = 0; });
+  });
+</script>
+
+</body>
+</html>

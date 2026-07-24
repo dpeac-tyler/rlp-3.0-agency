@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Queues — RLP Agency Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header (shared chrome) -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html">
+      <img class="app-header__logo" src="assets/tyler-t.png" alt="Tenant logo">
+      <span class="app-header__brand-name">Name of Tenant</span>
+    </a>
+    <nav class="app-header__links" aria-label="Account">
+      <a href="settings.html">Settings</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="search.html">Search</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Help</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Customizable toolbar (shared chrome, rendered by js/toolbar.js) -->
+  <div id="toolbar"></div>
+
+  <!-- Page content -->
+  <main class="page-body">
+
+    <ol class="breadcrumb" aria-label="Breadcrumb">
+      <li class="breadcrumb__item"><a href="queues.html">Queues</a></li>
+      <li class="breadcrumb__item"><span class="breadcrumb__current" id="breadcrumb-current">Open</span></li>
+    </ol>
+
+    <h1 class="page-title" id="page-title">Open Applications</h1>
+
+    <div class="accordion">
+      <button type="button" class="accordion__button" id="icon-key-button" aria-expanded="false" aria-controls="icon-key-content">
+        Icon Key
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="accordion__content" id="icon-key-content" hidden>
+        <div class="accordion__content-label">Options and Control Types</div>
+        <div class="icon-key-grid">
+          <div class="icon-key-item"><img src="assets/claim-task.png" alt=""> Claim Task</div>
+          <div class="icon-key-item"><img src="assets/unclaim-task.png" alt=""> Unclaim Task</div>
+          <div class="icon-key-item"><img src="assets/eye-icon.png" alt=""> View Task</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-tabs" role="group" aria-label="Queue category">
+      <button type="button" class="filter-tabs__btn is-active" data-filter="open">Open</button>
+      <button type="button" class="filter-tabs__btn" data-filter="pending">Pending</button>
+      <button type="button" class="filter-tabs__btn" data-filter="denied">Denied</button>
+      <button type="button" class="filter-tabs__btn" data-filter="closed">Closed</button>
+    </div>
+
+    <form style="margin-top: 24px" onsubmit="return false;">
+      <div class="field-grid">
+        <div class="field">
+          <label for="application-title">Application Title</label>
+          <select id="application-title" name="application-title">
+            <option value="">Please Select</option>
+            <option value="business-license">Business License</option>
+            <option value="contractor-license">Contractor License Renewal</option>
+            <option value="professional-engineer">Professional Engineer Application</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-name">Task Name</label>
+          <select id="task-name" name="task-name">
+            <option value="">Please Select</option>
+            <option value="background-check">Background Check</option>
+            <option value="child-support-check">Child Support Check</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="constituent-name">Constituent Name</label>
+          <input type="text" id="constituent-name" name="constituent-name">
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label for="submitted-by">Submitted By</label>
+          <input type="text" id="submitted-by" name="submitted-by">
+        </div>
+        <div class="field">
+          <label for="submitted-date">Submitted Date</label>
+          <input type="date" id="submitted-date" name="submitted-date">
+        </div>
+        <div class="field">
+          <label for="user-group-button">User Group</label>
+          <div class="multiselect">
+            <button type="button" class="multiselect-trigger" id="user-group-button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="multiselect-trigger-text">Please Select</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="multiselect-panel" id="user-group-panel" hidden>
+              <label class="multiselect-option"><input type="checkbox" name="user-group" value="Administrators"><span>Administrators</span></label>
+              <label class="multiselect-option"><input type="checkbox" name="user-group" value="Application Processors"><span>Application Processors</span></label>
+              <label class="multiselect-option"><input type="checkbox" name="user-group" value="License Reviewers"><span>License Reviewers</span></label>
+              <label class="multiselect-option"><input type="checkbox" name="user-group" value="Analyst Team"><span>Analyst Team</span></label>
+              <label class="multiselect-option"><input type="checkbox" name="user-group" value="Back Office Supervisors"><span>Back Office Supervisors</span></label>
+              <label class="multiselect-option"><input type="checkbox" name="user-group" value="Back Office Users"><span>Back Office Users</span></label>
+              <label class="multiselect-option"><input type="checkbox" name="user-group" value="Supervisors"><span>Supervisors</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn--primary">Search</button>
+        <button type="button" class="btn btn--secondary" id="clear-search">Clear</button>
+      </div>
+    </form>
+
+    <!-- Open view -->
+    <div id="open-view" style="margin-top: 32px">
+      <div class="table-controls">
+        <div class="table-controls__count">Showing 1 - 5 of 5 Entries</div>
+        <div class="table-controls__right">
+          <label for="open-entries-per-page">Show</label>
+          <select id="open-entries-per-page">
+            <option value="100" selected>100</option>
+            <option value="50">50</option>
+            <option value="25">25</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Application Title <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Task Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Constituent Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submitted By <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submitted Date <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>User Group <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Controls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Business Application 123</td>
+            <td>Task 1 of 1</td>
+            <td>John Smith</td>
+            <td>Alan Jones</td>
+            <td>03/15/2026</td>
+            <td>License Reviewers</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=1" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+              <button type="button" class="icon-btn claim-toggle" aria-label="Claim Task"><img src="assets/claim-task.png" alt="" width="30" height="30"></button>
+            </td>
+          </tr>
+          <tr>
+            <td>Professional Engineer Application</td>
+            <td>Task 1 of 2</td>
+            <td>Maria Garcia</td>
+            <td>Sarah Johnson</td>
+            <td>03/16/2026</td>
+            <td>Application Processors</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=2" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+              <button type="button" class="icon-btn claim-toggle" aria-label="Claim Task"><img src="assets/claim-task.png" alt="" width="30" height="30"></button>
+            </td>
+          </tr>
+          <tr>
+            <td>Contractor License Renewal</td>
+            <td>Task 1 of 1</td>
+            <td>Robert Williams</td>
+            <td>Michael Chen</td>
+            <td>03/17/2026</td>
+            <td>License Reviewers</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=3" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+              <button type="button" class="icon-btn claim-toggle" aria-label="Claim Task"><img src="assets/claim-task.png" alt="" width="30" height="30"></button>
+            </td>
+          </tr>
+          <tr>
+            <td>Business Application 456</td>
+            <td>Task 2 of 2</td>
+            <td>Jennifer Lee</td>
+            <td>Alan Jones</td>
+            <td>03/18/2026</td>
+            <td>Application Processors</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=4" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+              <button type="button" class="icon-btn claim-toggle" aria-label="Claim Task"><img src="assets/claim-task.png" alt="" width="30" height="30"></button>
+            </td>
+          </tr>
+          <tr>
+            <td>Professional Engineer Application</td>
+            <td>Task 1 of 1</td>
+            <td>David Brown</td>
+            <td>Sarah Johnson</td>
+            <td>03/19/2026</td>
+            <td>License Reviewers</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=5" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+              <button type="button" class="icon-btn claim-toggle" aria-label="Claim Task"><img src="assets/claim-task.png" alt="" width="30" height="30"></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav aria-label="Pagination">
+        <ul class="pagination">
+          <li><a href="#" class="pagination__arrow" aria-label="Previous page">‹ Previous</a></li>
+          <li><a href="#" class="is-current" aria-label="Page 1" aria-current="page">1</a></li>
+          <li><a href="#" aria-label="Page 2">2</a></li>
+          <li><a href="#" aria-label="Page 3">3</a></li>
+          <li><a href="#" aria-label="Page 4">4</a></li>
+          <li><a href="#" aria-label="Page 5">5</a></li>
+          <li><a href="#" class="pagination__arrow" aria-label="Next page">Next ›</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Pending view (no data modeled yet) -->
+    <div id="pending-view" style="margin-top: 32px" hidden>
+      <p class="empty-state">No pending applications in this queue.</p>
+    </div>
+
+    <!-- Denied view -->
+    <div id="denied-view" style="margin-top: 32px" hidden>
+      <div class="table-controls">
+        <div class="table-controls__count">Showing 1 - 4 of 4 Entries</div>
+        <div class="table-controls__right">
+          <label for="denied-entries-per-page">Show</label>
+          <select id="denied-entries-per-page">
+            <option value="100" selected>100</option>
+            <option value="50">50</option>
+            <option value="25">25</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Application Title <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Task Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Constituent Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submitted Date <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Closed Date <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Closed By <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>User Group <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Final Status <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Controls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Business Application 456</td>
+            <td>Background Check</td>
+            <td>Jennifer Lee</td>
+            <td>03/18/2026</td>
+            <td>04/02/2026</td>
+            <td>Sarah Johnson</td>
+            <td>Application Processors</td>
+            <td class="status-text--denied">Denied</td>
+            <td class="controls-cell"><a href="task-detail-denied.html" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a></td>
+          </tr>
+          <tr>
+            <td>Contractor License Application</td>
+            <td>Eligibility Review</td>
+            <td>Kevin Martinez</td>
+            <td>03/10/2026</td>
+            <td>03/28/2026</td>
+            <td>Michael Chen</td>
+            <td>License Reviewers</td>
+            <td class="status-text--denied">Denied</td>
+            <td class="controls-cell"><a href="task-detail-denied.html" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a></td>
+          </tr>
+          <tr>
+            <td>Professional Engineer Application</td>
+            <td>Document Review</td>
+            <td>Lisa Thompson</td>
+            <td>02/25/2026</td>
+            <td>03/15/2026</td>
+            <td>Alan Jones</td>
+            <td>License Reviewers</td>
+            <td class="status-text--denied">Denied</td>
+            <td class="controls-cell"><a href="task-detail-denied.html" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a></td>
+          </tr>
+          <tr>
+            <td>Business Application 789</td>
+            <td>Background Check</td>
+            <td>Thomas Wilson</td>
+            <td>03/01/2026</td>
+            <td>03/20/2026</td>
+            <td>Sarah Johnson</td>
+            <td>Application Processors</td>
+            <td class="status-text--denied">Denied</td>
+            <td class="controls-cell"><a href="task-detail-denied.html" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav aria-label="Pagination">
+        <ul class="pagination">
+          <li><a href="#" class="pagination__arrow" aria-label="Previous page">‹ Previous</a></li>
+          <li><a href="#" class="is-current" aria-label="Page 1" aria-current="page">1</a></li>
+          <li><a href="#" class="pagination__arrow" aria-label="Next page">Next ›</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Closed view (no data modeled yet) -->
+    <div id="closed-view" style="margin-top: 32px" hidden>
+      <p class="empty-state">No closed applications in this queue.</p>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="js/toolbar.js"></script>
+<script>
+  initToolbar('#toolbar', { activeKey: 'queues' });
+
+  // Icon Key accordion
+  (function () {
+    var button = document.getElementById('icon-key-button');
+    var content = document.getElementById('icon-key-content');
+    button.addEventListener('click', function () {
+      var expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      content.hidden = expanded;
+    });
+  })();
+
+  // Category filter tabs
+  (function () {
+    var tabs = document.querySelectorAll('.filter-tabs__btn');
+    var views = {
+      open: document.getElementById('open-view'),
+      pending: document.getElementById('pending-view'),
+      denied: document.getElementById('denied-view'),
+      closed: document.getElementById('closed-view'),
+    };
+    var titles = {
+      open: 'Open Applications',
+      pending: 'Pending Applications',
+      denied: 'Denied Applications',
+      closed: 'Closed Applications',
+    };
+    var labels = { open: 'Open', pending: 'Pending', denied: 'Denied', closed: 'Closed' };
+    var pageTitle = document.getElementById('page-title');
+    var breadcrumbCurrent = document.getElementById('breadcrumb-current');
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var key = tab.getAttribute('data-filter');
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+
+        Object.keys(views).forEach(function (k) { views[k].hidden = k !== key; });
+        pageTitle.textContent = titles[key];
+        breadcrumbCurrent.textContent = labels[key];
+      });
+    });
+  })();
+
+  // User Group multiselect
+  (function () {
+    var trigger = document.getElementById('user-group-button');
+    var panel = document.getElementById('user-group-panel');
+    var triggerText = trigger.querySelector('.multiselect-trigger-text');
+    var checkboxes = panel.querySelectorAll('input[type="checkbox"]');
+
+    function updateTriggerText() {
+      var selected = Array.prototype.filter.call(checkboxes, function (cb) { return cb.checked; }).map(function (cb) { return cb.value; });
+      if (selected.length === 0) triggerText.textContent = 'Please Select';
+      else if (selected.length === 1) triggerText.textContent = selected[0];
+      else triggerText.textContent = selected.length + ' selected';
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+    });
+
+    checkboxes.forEach(function (cb) { cb.addEventListener('change', updateTriggerText); });
+
+    panel.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    document.addEventListener('click', function (e) {
+      if (!trigger.contains(e.target) && !panel.contains(e.target)) {
+        trigger.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+      }
+    });
+
+    document.getElementById('clear-search').addEventListener('click', function () {
+      checkboxes.forEach(function (cb) { cb.checked = false; });
+      updateTriggerText();
+    });
+  })();
+
+  // Claim / unclaim toggle
+  (function () {
+    document.querySelectorAll('.claim-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var claimed = btn.getAttribute('data-claimed') === 'true';
+        var img = btn.querySelector('img');
+        if (claimed) {
+          img.src = 'assets/claim-task.png';
+          btn.setAttribute('aria-label', 'Claim Task');
+          btn.setAttribute('data-claimed', 'false');
+        } else {
+          img.src = 'assets/unclaim-task.png';
+          btn.setAttribute('aria-label', 'Unclaim Task');
+          btn.setAttribute('data-claimed', 'true');
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

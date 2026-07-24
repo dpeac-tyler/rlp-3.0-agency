@@ -32,6 +32,12 @@
 
   var DEFAULT_ORDER = ['home', 'tasks', 'queues', 'constituents', 'licenses', 'applications', 'metrics'];
 
+  // Catalog keys that map to a real page. Add an entry here as more screens are built.
+  var PAGE_LINKS = {
+    home: 'index.html',
+    queues: 'queues.html',
+  };
+
   function loadPersisted() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
@@ -109,6 +115,7 @@
 
   Toolbar.prototype.select = function (key) {
     if (this.state.editing) return;
+    if (PAGE_LINKS[key]) { window.location.href = PAGE_LINKS[key]; return; }
     this.setState({ active: key });
   };
 
