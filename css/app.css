@@ -87,21 +87,21 @@ button {
 }
 
 .app-header__logo {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   display: block;
 }
 
 .app-header__brand-name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .app-header__links {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 13px;
+  gap: 18px;
+  font-size: 16px;
   color: var(--c-toolbar-on-dark);
 }
 
@@ -128,7 +128,7 @@ button {
   display: flex;
   align-items: stretch;
   padding: 0 8px;
-  min-height: 48px;
+  min-height: 52px;
 }
 
 .toolbar-chevron {
@@ -160,10 +160,10 @@ button {
 .toolbar-pill {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 0 15px;
-  height: 48px;
-  font-size: 14px;
+  gap: 8px;
+  padding: 0 16px;
+  height: 52px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   position: relative;
@@ -187,11 +187,11 @@ button {
 }
 
 .toolbar-pill--editing {
-  height: 34px;
-  padding: 0 12px;
+  height: 38px;
+  padding: 0 13px;
   margin: 7px 3px;
   border-radius: var(--r-pill);
-  font-size: 13.5px;
+  font-size: 16px;
   cursor: grab;
   background: rgba(255, 255, 255, .10);
   border: 1px dashed rgba(255, 255, 255, .4);
@@ -212,12 +212,12 @@ button {
 }
 
 .toolbar-pill-grip {
-  font-size: 14px;
+  font-size: 16px;
   color: #8ba3c7;
 }
 
 .toolbar-pill-remove {
-  font-size: 15px;
+  font-size: 17px;
   margin-left: 3px;
   color: #c9d6ea;
   padding: 0;
@@ -226,22 +226,22 @@ button {
 .toolbar-badge {
   background: var(--c-gold);
   color: var(--c-gold-text);
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
-  border-radius: 9px;
-  padding: 1px 7px;
+  border-radius: 12px;
+  padding: 2px 9px;
 }
 
 .toolbar-add-btn {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 0 13px;
-  height: 34px;
+  gap: 6px;
+  padding: 0 15px;
+  height: 38px;
   margin: 7px 3px;
   border-radius: var(--r-pill);
-  font-size: 13.5px;
+  font-size: 16px;
   font-weight: 600;
   background: transparent;
   border: 1px dashed #5b7cb0;
@@ -251,12 +251,12 @@ button {
 .toolbar-customize-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 14px;
-  height: 34px;
+  gap: 7px;
+  padding: 0 16px;
+  height: 38px;
   margin: 7px 0;
   border-radius: var(--r-pill);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   flex: 0 0 auto;
   background: transparent;
@@ -276,37 +276,37 @@ button {
   left: 16px;
   margin-top: 6px;
   z-index: 30;
-  width: 320px;
+  width: 340px;
   background: #fff;
   border: 1px solid var(--c-border);
   border-radius: var(--r-panel);
   box-shadow: var(--shadow-menu);
-  padding: 10px;
+  padding: 12px;
 }
 
 .toolbar-add-menu__heading {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: .5px;
+  letter-spacing: .4px;
   color: var(--c-text-secondary);
-  padding: 4px 8px 8px;
+  padding: 4px 8px 10px;
 }
 
 .toolbar-add-menu__list {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  max-height: 260px;
+  gap: 2px;
+  max-height: 300px;
   overflow: auto;
 }
 
 .toolbar-add-menu__row {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 9px 10px;
+  gap: 12px;
+  padding: 10px 10px;
   border-radius: var(--r-pill);
-  font-size: 13.5px;
+  font-size: 16px;
   color: var(--c-text-primary);
   width: 100%;
   text-align: left;
@@ -318,9 +318,9 @@ button {
 }
 
 .toolbar-add-menu__row-icon {
-  font-size: 16px;
+  font-size: 18px;
   color: var(--c-gold-icon);
-  width: 20px;
+  width: 22px;
   text-align: center;
 }
 
@@ -329,13 +329,13 @@ button {
 }
 
 .toolbar-add-menu__row-plus {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--c-text-secondary);
 }
 
 .toolbar-add-menu__empty {
-  padding: 14px 10px;
-  font-size: 13px;
+  padding: 16px 10px;
+  font-size: 16px;
   color: var(--c-text-secondary);
   text-align: center;
 }
@@ -350,9 +350,9 @@ button {
 }
 
 .overline {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: .5px;
+  letter-spacing: .4px;
   text-transform: uppercase;
   color: var(--c-text-secondary);
 }
@@ -366,15 +366,15 @@ button {
 }
 
 .greeting__title {
-  font-size: 21px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--c-text-primary);
 }
 
 .greeting__date {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--c-text-secondary);
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .search-panel {
@@ -400,8 +400,8 @@ button {
 }
 
 .search-toggle__segment {
-  padding: 7px 16px;
-  font-size: 13px;
+  padding: 9px 18px;
+  font-size: 16px;
   color: var(--c-text-primary);
   background: #fff;
   border-left: 1px solid #c9ccd0;
@@ -418,12 +418,12 @@ button {
 }
 
 .search-advanced {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--c-blue);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   text-decoration: none;
 }
 
@@ -432,7 +432,7 @@ button {
 }
 
 .search-advanced i {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .search-field-row {
@@ -452,7 +452,7 @@ button {
 }
 
 .search-box i {
-  font-size: 17px;
+  font-size: 19px;
   color: var(--c-blue);
 }
 
@@ -461,7 +461,7 @@ button {
   border: none;
   outline: none;
   font-family: inherit;
-  font-size: 14.5px;
+  font-size: 16px;
   color: var(--c-text-primary);
   background: transparent;
 }
@@ -471,20 +471,20 @@ button {
 }
 
 .search-kbd {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--c-text-secondary);
   border: 1px solid #c9ccd0;
   border-radius: var(--r-chip-sm);
-  padding: 2px 7px;
+  padding: 3px 9px;
 }
 
 .search-btn {
   background: var(--c-blue);
   color: #fff;
   border-radius: var(--r-panel);
-  padding: 0 26px;
-  font-size: 14.5px;
+  padding: 0 28px;
+  font-size: 16px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -513,10 +513,10 @@ button {
   background: var(--c-tile-bg);
   border: 1px solid var(--c-border);
   border-radius: var(--r-panel);
-  padding: 20px 22px;
+  padding: 24px 26px;
   display: flex;
   flex-direction: column;
-  min-height: 170px;
+  min-height: 200px;
   cursor: pointer;
   color: inherit;
 }
@@ -526,30 +526,30 @@ button {
 }
 
 .tile--settings {
-  padding: 24px 26px;
-  max-height: 120px;
+  padding: 28px 30px;
+  max-height: 150px;
   min-height: 0;
 }
 
 .tile__header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .tile__icon {
-  font-size: 20px;
+  font-size: 28px;
   color: var(--c-gold-icon);
-  width: 24px;
+  width: 32px;
   text-align: center;
 }
 
 .tile__title {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--c-header-navy);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .tile--settings .tile__title {
@@ -557,15 +557,15 @@ button {
 }
 
 .tile__body {
-  font-size: 13.5px;
+  font-size: 16px;
   color: var(--c-text-secondary);
   line-height: 1.5;
   flex: 1;
 }
 
 .tile__footer {
-  margin-top: 14px;
-  padding-top: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid var(--c-hairline);
   display: flex;
   justify-content: space-between;
@@ -573,7 +573,7 @@ button {
 }
 
 .tile__footer a {
-  font-size: 13.5px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--c-header-navy);
   text-decoration: none;
@@ -593,7 +593,7 @@ button {
 }
 
 .settings-title {
-  font-size: 21px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--c-text-primary);
 }
@@ -612,8 +612,8 @@ button {
 
 .settings-rail__heading {
   border-left: 3px solid var(--c-header-navy);
-  padding: 2px 0 2px 14px;
-  font-size: 16px;
+  padding: 4px 0 4px 16px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--c-text-primary);
 }
@@ -628,8 +628,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 2px 12px 17px;
-  font-size: 15px;
+  padding: 14px 2px 14px 18px;
+  font-size: 16px;
   text-decoration: none;
   border-bottom: 1px solid var(--c-hairline-2);
 }
