@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agency Home — RLP Agency Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header (shared chrome) -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html">
+      <img class="app-header__logo" src="assets/tyler-t.png" alt="Tenant logo">
+      <span class="app-header__brand-name">Name of Tenant</span>
+    </a>
+    <nav class="app-header__links" aria-label="Account">
+      <a href="settings.html">Settings</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Search</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Help</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Customizable toolbar (shared chrome, rendered by js/toolbar.js) -->
+  <div id="toolbar"></div>
+
+  <!-- Page content -->
+  <main class="page-content">
+
+    <section class="greeting">
+      <h1 class="greeting__title">Good morning, Dana.</h1>
+      <div class="greeting__date">Wednesday, July 23</div>
+
+      <div class="search-panel">
+        <div class="search-panel__top">
+          <div class="search-toggle" role="group" aria-label="Search type">
+            <button type="button" class="search-toggle__segment is-active" data-search-type="constituent">Constituent</button>
+            <button type="button" class="search-toggle__segment" data-search-type="invoice">Invoice</button>
+            <button type="button" class="search-toggle__segment" data-search-type="license">License</button>
+            <button type="button" class="search-toggle__segment" data-search-type="submission">Submission</button>
+          </div>
+          <a class="search-advanced" href="#">Advanced search <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+        </div>
+        <form class="search-field-row" action="#" onsubmit="return false;">
+          <label class="search-box" for="global-search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <input type="text" id="global-search" placeholder="Last name, first name, business, DBA, license #, or email…">
+            <span class="search-kbd" aria-hidden="true">⌘K</span>
+          </label>
+          <button type="submit" class="search-btn">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <section style="padding: 0 32px 32px">
+      <div class="overline" style="margin-bottom: 14px">Quick Actions</div>
+      <div class="tiles-grid">
+
+        <a class="tile" href="#">
+          <div class="tile__header">
+            <i class="fa-solid fa-user-plus tile__icon" aria-hidden="true"></i>
+            <div class="tile__title">Create Constituent Account</div>
+          </div>
+          <div class="tile__body">Set up a new constituent account on their behalf.</div>
+        </a>
+
+        <div class="tile">
+          <div class="tile__header">
+            <i class="fa-solid fa-paper-plane tile__icon" aria-hidden="true"></i>
+            <div class="tile__title">Submit Constituent Application</div>
+          </div>
+          <div class="tile__body">Submit an application on behalf of a constituent.</div>
+          <div class="tile__footer">
+            <a href="#">Start Submission</a>
+            <a href="#">Continue Submission</a>
+          </div>
+        </div>
+
+        <a class="tile" href="#">
+          <div class="tile__header">
+            <i class="fa-solid fa-chart-column tile__icon" aria-hidden="true"></i>
+            <div class="tile__title">Metrics</div>
+          </div>
+          <div class="tile__body">View available reports for your agency.</div>
+        </a>
+
+        <div class="tile">
+          <div class="tile__header">
+            <i class="fa-solid fa-id-badge tile__icon" aria-hidden="true"></i>
+            <div class="tile__title">License Types</div>
+          </div>
+          <div class="tile__body">Set up licenses for use in applications.</div>
+          <div class="tile__footer">
+            <a href="#">Create New</a>
+            <a href="#">View All</a>
+          </div>
+        </div>
+
+        <div class="tile">
+          <div class="tile__header">
+            <i class="fa-solid fa-file-lines tile__icon" aria-hidden="true"></i>
+            <div class="tile__title">Applications</div>
+          </div>
+          <div class="tile__body">View your applications or start a new one.</div>
+          <div class="tile__footer">
+            <a href="#">Start New Application</a>
+            <a href="#">All Applications</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script src="js/toolbar.js"></script>
+<script>
+  initToolbar('#toolbar', { activeKey: 'home' });
+
+  // Search type segmented control
+  document.querySelectorAll('.search-toggle__segment').forEach(function (segment) {
+    segment.addEventListener('click', function () {
+      document.querySelectorAll('.search-toggle__segment').forEach(function (s) {
+        s.classList.remove('is-active');
+      });
+      segment.classList.add('is-active');
+    });
+  });
+</script>
+
+</body>
+</html>

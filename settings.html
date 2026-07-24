@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings — RLP Agency Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header (shared chrome) -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html">
+      <img class="app-header__logo" src="assets/tyler-t.png" alt="Tenant logo">
+      <span class="app-header__brand-name">Name of Tenant</span>
+    </a>
+    <nav class="app-header__links" aria-label="Account">
+      <a href="settings.html">Settings</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Search</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Help</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Customizable toolbar (shared chrome, rendered by js/toolbar.js) -->
+  <div id="toolbar"></div>
+
+  <!-- Page content -->
+  <main class="settings-content">
+    <h1 class="settings-title">Settings</h1>
+
+    <div class="settings-body">
+
+      <!-- Category rail -->
+      <nav class="settings-rail" aria-label="Settings categories">
+        <div class="settings-rail__heading">All settings</div>
+        <div class="settings-rail__list">
+          <a class="settings-rail__row" href="#">
+            <span class="settings-rail__row-label">Agency Information</span>
+            <span class="settings-rail__row-count">4</span>
+          </a>
+          <a class="settings-rail__row" href="#">
+            <span class="settings-rail__row-label">Application Processing</span>
+            <span class="settings-rail__row-count">3</span>
+          </a>
+          <a class="settings-rail__row" href="#">
+            <span class="settings-rail__row-label">Communications</span>
+            <span class="settings-rail__row-count">1</span>
+          </a>
+          <a class="settings-rail__row" href="#">
+            <span class="settings-rail__row-label">System Administration</span>
+            <span class="settings-rail__row-count">3</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Settings tile grid -->
+      <div class="settings-tiles tiles-grid tiles-grid--settings">
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Agency Profile</div>
+          <div class="tile__body">View and Edit Agency Profile.</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Appeals</div>
+          <div class="tile__body">View, Edit and Add Appeals Information</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Application Contact</div>
+          <div class="tile__body">View and Edit Agency Contact Information</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Assets</div>
+          <div class="tile__body">View and Edit Assets</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Configurations</div>
+          <div class="tile__body">View Agency Configurations</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Correspondence</div>
+          <div class="tile__body">View, Edit and Add Email and Letter Templates.</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Denials</div>
+          <div class="tile__body">View, Edit and Add Denial Information</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Inspections</div>
+          <div class="tile__body">View and Manage Inspections</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Key Contacts</div>
+          <div class="tile__body">View, Edit and Add Agency Key Contacts</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Logs</div>
+          <div class="tile__body">View Log Information</div>
+        </a>
+
+        <a class="tile tile--settings" href="#">
+          <div class="tile__title">Users/Groups</div>
+          <div class="tile__body">View and Edit Agency Users and Groups</div>
+        </a>
+
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="js/toolbar.js"></script>
+<script>
+  initToolbar('#toolbar', { activeKey: null });
+</script>
+
+</body>
+</html>

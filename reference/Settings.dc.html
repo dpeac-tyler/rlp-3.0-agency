@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  body{margin:0;background:#f0eee9;font-family:'Public Sans',system-ui,sans-serif}
+  /* settings page */
+  a{color:#005ea2}
+  a:hover{color:#1a4480}
+</style>
+</helmet>
+
+<div style="width:1280px;margin:0 auto;background:#fff">
+  <!-- header -->
+  <div style="height:52px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+    <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+    <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#" style="color:#dbe4f0;text-decoration:none">Settings</a><span style="color:#3d557d">|</span><a href="#" style="color:#dbe4f0;text-decoration:none">Search</a><span style="color:#3d557d">|</span><a href="#" style="color:#dbe4f0;text-decoration:none">Help</a><span style="color:#3d557d">|</span><a href="#" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+  </div>
+  <!-- customizable toolbar (FA icons) -->
+  <div style="background:#1b3763;position:relative;display:flex;align-items:stretch;padding:0 8px;min-height:48px">
+    <sc-if value="{{ canLeft }}" hint-placeholder-val=""><div onClick="{{ scrollLeft }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><i class="fa-solid fa-chevron-left" style="font-size:16px"></i></div></sc-if>
+    <div ref="{{ navRef }}" onScroll="{{ onNavScroll }}" style="position:relative;flex:1;min-width:0;overflow-x:hidden;display:flex;align-items:stretch;flex-wrap:nowrap">
+    <sc-for list="{{ navItems }}" as="nav" hint-placeholder-count="6">
+      <div draggable="{{ nav.draggable }}" onClick="{{ nav.onClick }}" onDragStart="{{ nav.onDragStart }}" onDragOver="{{ nav.onDragOver }}" onDrop="{{ nav.onDrop }}" style="{{ nav.pillStyle }}">
+        <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><i class="fa-solid fa-grip-vertical" style="font-size:14px;color:#8ba3c7"></i></sc-if>
+        <i class="{{ nav.faIcon }}" style="font-size:16px"></i>
+        <span>{{ nav.label }}</span>
+        <sc-if value="{{ nav.hasBadge }}" hint-placeholder-val=""><span style="background:#e6a817;color:#3d2a00;font-size:11px;font-weight:700;border-radius:9px;padding:1px 7px">{{ nav.badge }}</span></sc-if>
+        <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><i class="fa-solid fa-xmark" onClick="{{ nav.onRemove }}" style="font-size:15px;margin-left:3px;color:#c9d6ea;cursor:pointer"></i></sc-if>
+      </div>
+    </sc-for>
+    </div>
+    <sc-if value="{{ canRight }}" hint-placeholder-val="{{ true }}"><div onClick="{{ scrollRight }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><i class="fa-solid fa-chevron-right" style="font-size:16px"></i></div></sc-if>
+    <sc-if value="{{ editing }}" hint-placeholder-val="">
+      <div onClick="{{ toggleAdd }}" style="flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:0 13px;height:34px;margin:7px 3px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1px dashed #5b7cb0;color:#a9c7e8"><i class="fa-solid fa-plus" style="font-size:14px"></i>Add</div>
+    </sc-if>
+    <div onClick="{{ toggleEdit }}" style="{{ customizeStyle }}"><i class="{{ faCustomizeIcon }}" style="font-size:14px"></i>{{ editLabel }}</div>
+    <sc-if value="{{ addOpen }}" hint-placeholder-val="">
+      <div style="position:absolute;top:100%;left:16px;margin-top:6px;z-index:30;width:320px;background:#fff;border:1px solid #dfe1e6;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.22);padding:10px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65;padding:4px 8px 8px">ADD TO TOOLBAR</div>
+        <sc-if value="{{ hasAvailable }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:1px;max-height:260px;overflow:auto">
+            <sc-for list="{{ available }}" as="opt" hint-placeholder-count="4">
+              <div onClick="{{ opt.onAdd }}" style="display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:6px;cursor:pointer;font-size:13.5px;color:#1b1b1b"><i class="{{ opt.faIcon }}" style="font-size:16px;color:#a97400;width:20px;text-align:center"></i><span style="flex:1">{{ opt.label }}</span><i class="fa-solid fa-plus" style="font-size:14px;color:#565c65"></i></div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ hasAvailable }}" hint-placeholder-val="">
+          <div style="padding:14px 10px;font-size:13px;color:#565c65;text-align:center">All links are already on your toolbar.</div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </div>
+  <!-- content -->
+  <div style="padding:26px 32px 40px;min-height:640px">
+    <div style="font-size:21px;font-weight:700;color:#1b1b1b">Settings</div>
+    <div style="margin-top:24px;display:flex;gap:40px;align-items:flex-start">
+      <!-- category rail -->
+      <div style="width:300px;flex:none">
+        <div style="border-left:3px solid #162e51;padding:2px 0 2px 14px;font-size:16px;font-weight:700;color:#1b1b1b">All settings</div>
+        <div style="margin-top:6px;display:flex;flex-direction:column">
+          <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px 12px 17px;font-size:15px;text-decoration:none;border-bottom:1px solid #e6e9ec"><span style="color:#005ea2">Agency Information</span><span style="color:#565c65">4</span></a>
+          <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px 12px 17px;font-size:15px;text-decoration:none;border-bottom:1px solid #e6e9ec"><span style="color:#005ea2">Application Processing</span><span style="color:#565c65">3</span></a>
+          <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px 12px 17px;font-size:15px;text-decoration:none;border-bottom:1px solid #e6e9ec"><span style="color:#005ea2">Communications</span><span style="color:#565c65">1</span></a>
+          <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px 12px 17px;font-size:15px;text-decoration:none;border-bottom:1px solid #e6e9ec"><span style="color:#005ea2">System Administration</span><span style="color:#565c65">3</span></a>
+        </div>
+      </div>
+      <!-- tiles -->
+      <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Agency Profile</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View and Edit Agency Profile.</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Appeals</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View, Edit and Add Appeals Information</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Application Contact</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View and Edit Agency Contact Information</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Assets</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View and Edit Assets</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Configurations</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View Agency Configurations</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Correspondence</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View, Edit and Add Email and Letter Templates.</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Denials</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View, Edit and Add Denial Information</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Inspections</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View and Manage Inspections</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Key Contacts</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View, Edit and Add Agency Key Contacts</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Logs</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View Log Information</div>
+        </a>
+        <a href="#" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:24px 26px;display:flex;flex-direction:column;max-height:120px;cursor:pointer">
+          <div style="font-size:16px;font-weight:700;color:#162e51;margin-bottom:8px">Users/Groups</div>
+          <div style="font-size:13.5px;color:#565c65;line-height:1.5">View and Edit Agency Users and Groups</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  navRef = React.createRef();
+  state = {
+    items: ['home','tasks','queues','constituents','licenses','applications','metrics'],
+    active: null,
+    editing: false,
+    addOpen: false,
+    dragKey: null,
+    canLeft: false,
+    canRight: false,
+  };
+
+  componentDidMount() { this._ov = () => this.updateOverflow(); window.addEventListener('resize', this._ov); setTimeout(this._ov, 80); }
+  componentWillUnmount() { window.removeEventListener('resize', this._ov); }
+  componentDidUpdate(_p, prev) { if (prev.items !== this.state.items || prev.editing !== this.state.editing) setTimeout(() => this.updateOverflow(), 80); }
+  updateOverflow() {
+    const el = this.navRef.current; if (!el) return;
+    const canLeft = el.scrollLeft > 2;
+    const canRight = el.scrollLeft < (el.scrollWidth - el.clientWidth - 2);
+    if (canLeft !== this.state.canLeft || canRight !== this.state.canRight) this.setState({canLeft, canRight});
+  }
+  scrollDir(dir) {
+    const el = this.navRef.current; if (!el) return;
+    const kids = Array.from(el.children);
+    const vpr = el.getBoundingClientRect();
+    let dest;
+    if (dir > 0) {
+      const t = kids.find(k => (k.getBoundingClientRect().right - vpr.right) > 1);
+      dest = t ? el.scrollLeft + (t.getBoundingClientRect().right - vpr.right) : el.scrollWidth - el.clientWidth;
+    } else {
+      const before = kids.filter(k => (k.getBoundingClientRect().left - vpr.left) < -1);
+      const t = before[before.length - 1];
+      dest = t ? el.scrollLeft + (t.getBoundingClientRect().left - vpr.left) : 0;
+    }
+    el.scrollLeft = Math.max(0, Math.min(dest, el.scrollWidth - el.clientWidth));
+    this.updateOverflow();
+    setTimeout(() => this.updateOverflow(), 0);
+  }
+
+  catalog() {
+    return {
+      home:          {label:'Home',            fa:'fa-solid fa-house'},
+      tasks:         {label:'My Tasks',         badge:'12', fa:'fa-solid fa-list-check'},
+      queues:        {label:'Queues',           badge:'48', fa:'fa-solid fa-inbox'},
+      constituents:  {label:'Constituents',     fa:'fa-solid fa-users'},
+      licenses:      {label:'License Types',    fa:'fa-solid fa-id-badge'},
+      applications:  {label:'Applications',     fa:'fa-solid fa-file-lines'},
+      metrics:       {label:'Metrics',          fa:'fa-solid fa-chart-column'},
+      casemgmt:      {label:'Case Management',  fa:'fa-solid fa-folder-open'},
+      flags:         {label:'Flags',            fa:'fa-solid fa-flag'},
+      inspections:   {label:'Inspections',      fa:'fa-solid fa-clipboard-check'},
+      denials:       {label:'Denials',          fa:'fa-solid fa-ban'},
+      appeals:       {label:'Appeals',          fa:'fa-solid fa-gavel'},
+      correspondence:{label:'Correspondence',   fa:'fa-solid fa-envelope'},
+    };
+  }
+
+  addItem(key)    { this.setState(s => ({items:[...s.items, key], addOpen:false})); }
+  removeItem(key) { this.setState(s => ({items:s.items.filter(k=>k!==key), active: s.active===key ? (s.items.filter(k=>k!==key)[0]||null) : s.active})); }
+  dropOn(target)  {
+    const {dragKey, items} = this.state;
+    if (!dragKey || dragKey===target) { this.setState({dragKey:null}); return; }
+    const arr = items.filter(k=>k!==dragKey);
+    const to = arr.indexOf(target);
+    arr.splice(to, 0, dragKey);
+    this.setState({items:arr, dragKey:null});
+  }
+
+  pillStyle(active) {
+    if (this.state.editing) {
+      return 'display:flex;align-items:center;gap:6px;padding:0 12px;height:34px;margin:7px 3px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:grab;position:relative;background:rgba(255,255,255,.10);border:1px dashed rgba(255,255,255,.4);color:#eaf0f8;user-select:none;flex:0 0 auto;white-space:nowrap';
+    }
+    return 'display:flex;align-items:center;gap:7px;padding:0 15px;height:48px;font-size:14px;font-weight:600;cursor:pointer;position:relative;user-select:none;flex:0 0 auto;white-space:nowrap;border-bottom:3px solid ' + (active?'#e6a817':'transparent') + ';background:' + (active?'rgba(255,255,255,.07)':'transparent') + ';color:' + (active?'#fff':'#cdd9ea');
+  }
+
+  renderVals() {
+    const C = this.catalog();
+    const navItems = this.state.items.map(key => {
+      const c = C[key] || {label:key, fa:'fa-solid fa-link'};
+      return {
+        key, label:c.label, faIcon:c.fa,
+        badge: c.badge || '', hasBadge: !!c.badge && !this.state.editing,
+        editing: this.state.editing,
+        draggable: this.state.editing,
+        pillStyle: this.pillStyle(key===this.state.active),
+        onClick: () => { if(!this.state.editing) this.setState({active:key}); },
+        onRemove: (e) => { if(e&&e.stopPropagation) e.stopPropagation(); this.removeItem(key); },
+        onDragStart: () => this.setState({dragKey:key}),
+        onDragOver: (e) => { if(e&&e.preventDefault) e.preventDefault(); },
+        onDrop: (e) => { if(e&&e.preventDefault) e.preventDefault(); this.dropOn(key); },
+      };
+    });
+    const available = Object.keys(C).filter(k => !this.state.items.includes(k)).map(k => ({
+      key:k, label:C[k].label, faIcon:C[k].fa, onAdd: () => this.addItem(k),
+    }));
+    return {
+      navItems, available,
+      hasAvailable: available.length > 0,
+      editing: this.state.editing,
+      addOpen: this.state.addOpen,
+      toggleEdit: () => this.setState(s => ({editing:!s.editing, addOpen:false})),
+      toggleAdd:  () => this.setState(s => ({addOpen:!s.addOpen})),
+      navRef: this.navRef,
+      canLeft: this.state.canLeft,
+      canRight: this.state.canRight,
+      scrollLeft: () => this.scrollDir(-1),
+      scrollRight: () => this.scrollDir(1),
+      onNavScroll: () => this.updateOverflow(),
+      editLabel:  this.state.editing ? 'Done' : 'Customize',
+      faCustomizeIcon: this.state.editing ? 'fa-solid fa-check' : 'fa-solid fa-sliders',
+      customizeStyle: 'display:flex;align-items:center;gap:6px;padding:0 14px;height:34px;margin:7px 0;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;flex:0 0 auto;' + (this.state.editing ? 'background:#e6a817;color:#3d2a00;border:1px solid #e6a817' : 'background:transparent;color:#cdd9ea;border:1px solid #3d557d'),
+    };
+  }
+}
+</script>
+</body>
+</html>

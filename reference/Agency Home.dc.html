@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  body{margin:0;background:#f0eee9;font-family:'Public Sans',system-ui,sans-serif}
+  .material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased}
+  a{color:#005ea2;text-decoration:underline}
+  a:hover{color:#1a4480}
+  .dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+  .dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+  .dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+  .dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+  .dv-intro{font:400 12px/1.6 system-ui,sans-serif;color:rgba(0,0,0,.55);max-width:760px;margin:0 0 22px}
+  .dv-opts{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}
+  .dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+  .dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12px/1.35 system-ui,sans-serif;color:rgba(0,0,0,.6)}
+  .dv-olabel b{color:rgba(0,0,0,.85);font-weight:600}
+  .dv-card{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.08);overflow:hidden}
+  .dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+  .dv-next{margin:24px 0 0;font:12px/1.6 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t9">
+  <div class="dv-thd"><a class="dv-tid" href="#t9">9</a><span class="dv-tname"><a class="dv-oid" href="#8a">8a</a> with Font Awesome (free) icons</span></div>
+  <p class="dv-intro">Same combined homepage as <a class="dv-oid" href="#8a">8a</a> — customizable gold toolbar, search, card grid — but every icon is swapped for its Font Awesome 6 Free equivalent (house, list-check, inbox, users, id-badge, file-lines, chart-column, gear, etc.). Shares the same live toolbar state as 8a/6a.</p>
+  <div class="dv-opts">
+    <div class="dv-opt" id="9a">
+      <div class="dv-olabel"><a class="dv-oid" href="#9a">9a</a><span><b>Font Awesome icon set</b></span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#9a" style="color:#dbe4f0;text-decoration:none">Settings</a><span style="color:#3d557d">|</span><a href="#9a" style="color:#dbe4f0;text-decoration:none">Search</a><span style="color:#3d557d">|</span><a href="#9a" style="color:#dbe4f0;text-decoration:none">Help</a><span style="color:#3d557d">|</span><a href="#9a" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <!-- customizable toolbar (FA icons) -->
+        <div style="background:#1b3763;position:relative;display:flex;align-items:stretch;padding:0 8px;min-height:48px">
+          <sc-if value="{{ canLeft9 }}" hint-placeholder-val=""><div onClick="{{ scrollLeft9 }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><i class="fa-solid fa-chevron-left" style="font-size:16px"></i></div></sc-if>
+          <div ref="{{ navRef9 }}" onScroll="{{ onNavScroll }}" style="position:relative;flex:1;min-width:0;overflow-x:hidden;display:flex;align-items:stretch;flex-wrap:nowrap">
+          <sc-for list="{{ navItems }}" as="nav" hint-placeholder-count="5">
+            <div draggable="{{ nav.draggable }}" onClick="{{ nav.onClick }}" onDragStart="{{ nav.onDragStart }}" onDragOver="{{ nav.onDragOver }}" onDrop="{{ nav.onDrop }}" style="{{ nav.pillStyle }}">
+              <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><i class="fa-solid fa-grip-vertical" style="font-size:14px;color:#8ba3c7"></i></sc-if>
+              <i class="{{ nav.faIcon }}" style="font-size:16px"></i>
+              <span>{{ nav.label }}</span>
+              <sc-if value="{{ nav.hasBadge }}" hint-placeholder-val=""><span style="background:#e6a817;color:#3d2a00;font-size:11px;font-weight:700;border-radius:9px;padding:1px 7px">{{ nav.badge }}</span></sc-if>
+              <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><i class="fa-solid fa-xmark" onClick="{{ nav.onRemove }}" style="font-size:15px;margin-left:3px;color:#c9d6ea;cursor:pointer"></i></sc-if>
+            </div>
+          </sc-for>
+          </div>
+          <sc-if value="{{ canRight9 }}" hint-placeholder-val="{{ true }}"><div onClick="{{ scrollRight9 }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><i class="fa-solid fa-chevron-right" style="font-size:16px"></i></div></sc-if>
+          <sc-if value="{{ editing }}" hint-placeholder-val="">
+            <div onClick="{{ toggleAdd }}" style="flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:0 13px;height:34px;margin:7px 3px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1px dashed #5b7cb0;color:#a9c7e8"><i class="fa-solid fa-plus" style="font-size:14px"></i>Add</div>
+          </sc-if>
+          <div onClick="{{ toggleEdit }}" style="{{ customizeStyle }}"><i class="{{ faCustomizeIcon }}" style="font-size:14px"></i>{{ editLabel }}</div>
+          <sc-if value="{{ addOpen }}" hint-placeholder-val="">
+            <div style="position:absolute;top:100%;left:16px;margin-top:6px;z-index:30;width:320px;background:#fff;border:1px solid #dfe1e6;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.22);padding:10px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65;padding:4px 8px 8px">ADD TO TOOLBAR</div>
+              <sc-if value="{{ hasAvailable }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;gap:1px;max-height:260px;overflow:auto">
+                  <sc-for list="{{ available }}" as="opt" hint-placeholder-count="4">
+                    <div onClick="{{ opt.onAdd }}" style="display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:6px;cursor:pointer;font-size:13.5px;color:#1b1b1b"><i class="{{ opt.faIcon }}" style="font-size:16px;color:#a97400;width:20px;text-align:center"></i><span style="flex:1">{{ opt.label }}</span><i class="fa-solid fa-plus" style="font-size:14px;color:#565c65"></i></div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ hasAvailable }}" hint-placeholder-val="">
+                <div style="padding:14px 10px;font-size:13px;color:#565c65;text-align:center">All links are already on your toolbar.</div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+        <!-- content -->
+        <div style="background:#fff;min-height:600px">
+          <div style="padding:26px 32px 22px">
+            <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+            <div style="font-size:13px;color:#565c65;margin-top:2px">Wednesday, July 23</div>
+            <div style="margin-top:16px;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div style="display:inline-flex;border:1px solid #c9ccd0;border-radius:6px;overflow:hidden">
+                  <div style="padding:7px 16px;font-size:13px;font-weight:600;background:#005ea2;color:#fff">Constituent</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0;background:#fff">Invoice</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0;background:#fff">License</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0;background:#fff">Submission</div>
+                </div>
+                <a href="#9a" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:5px;text-decoration:none">Advanced search <i class="fa-solid fa-chevron-down" style="font-size:12px"></i></a>
+              </div>
+              <div style="display:flex;gap:10px">
+                <div style="flex:1;display:flex;align-items:center;gap:10px;border:2px solid #005ea2;border-radius:8px;padding:11px 15px;background:#fff"><i class="fa-solid fa-magnifying-glass" style="font-size:17px;color:#005ea2"></i><span style="flex:1;font-size:14.5px;color:#565c65">Last name, first name, business, DBA, license #, or email…</span><span style="font-size:11px;color:#565c65;border:1px solid #c9ccd0;border-radius:4px;padding:2px 7px;font-weight:600">⌘K</span></div>
+                <div style="background:#005ea2;color:#fff;border-radius:8px;padding:0 26px;font-size:14.5px;font-weight:700;display:flex;align-items:center">Search</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 32px 32px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.5px;color:#565c65;margin-bottom:14px">QUICK ACTIONS</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+              <a href="#9a" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px;cursor:pointer">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><i class="fa-solid fa-user-plus" style="font-size:20px;color:#a97400;width:24px;text-align:center"></i><div style="font-size:16px;font-weight:700;color:#162e51">Create Constituent Account</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up a new constituent account on their behalf.</div>
+              </a>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><i class="fa-solid fa-paper-plane" style="font-size:20px;color:#a97400;width:24px;text-align:center"></i><div style="font-size:16px;font-weight:700;color:#162e51">Submit Constituent Application</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Submit an application on behalf of a constituent.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#9a" style="font-size:13.5px;font-weight:600;color:#162e51">Start Submission</a><a href="#9a" style="font-size:13.5px;font-weight:600;color:#162e51">Continue Submission</a></div>
+              </div>
+              <a href="#9a" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px;cursor:pointer">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><i class="fa-solid fa-chart-column" style="font-size:20px;color:#a97400;width:24px;text-align:center"></i><div style="font-size:16px;font-weight:700;color:#162e51">Metrics</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View available reports for your agency.</div>
+              </a>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><i class="fa-solid fa-id-badge" style="font-size:20px;color:#a97400;width:24px;text-align:center"></i><div style="font-size:16px;font-weight:700;color:#162e51">License Types</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up licenses for use in applications.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#9a" style="font-size:13.5px;font-weight:600;color:#162e51">Create New</a><a href="#9a" style="font-size:13.5px;font-weight:600;color:#162e51">View All</a></div>
+              </div>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><i class="fa-solid fa-file-lines" style="font-size:20px;color:#a97400;width:24px;text-align:center"></i><div style="font-size:16px;font-weight:700;color:#162e51">Applications</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View your applications or start a new one.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#9a" style="font-size:13.5px;font-weight:600;color:#162e51">Start New Application</a><a href="#9a" style="font-size:13.5px;font-weight:600;color:#162e51">All Applications</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Try next: "compare 8a and 9a side by side" · "use Font Awesome duotone/regular weight" · "adopt 9a as the base going forward"</p>
+</section>
+
+<section class="dv-turn" id="t8">
+  <div class="dv-thd"><a class="dv-tid" href="#t8">8</a><span class="dv-tname">Everything together — <a class="dv-oid" href="#5a">5a</a> content + <a class="dv-oid" href="#6a">6a</a> customizable toolbar, navy + gold</span></div>
+  <p class="dv-intro">The full homepage in one place: the customizable, overflow-aware toolbar from <a class="dv-oid" href="#6a">6a</a> (Customize → drag / ✕ / + Add, chevrons when it overflows) over <a class="dv-oid" href="#5a">5a</a>'s content — greeting, search with type toggles + advanced, and the action card grid — all in the navy + warm-gold palette from <a class="dv-oid" href="#7b">7b</a>. The toolbar shares live state with 6a, so edits in either reflect in both.</p>
+  <div class="dv-opts">
+    <div class="dv-opt" id="8a">
+      <div class="dv-olabel"><a class="dv-oid" href="#8a">8a</a><span><b>Combined homepage</b> — live toolbar + search + cards</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#8a" style="color:#dbe4f0;text-decoration:none">Settings</a><span style="color:#3d557d">|</span><a href="#8a" style="color:#dbe4f0;text-decoration:none">Search</a><span style="color:#3d557d">|</span><a href="#8a" style="color:#dbe4f0;text-decoration:none">Help</a><span style="color:#3d557d">|</span><a href="#8a" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <!-- customizable toolbar (independent overflow state) -->
+        <div style="background:#1b3763;position:relative;display:flex;align-items:stretch;padding:0 8px;min-height:48px">
+          <sc-if value="{{ canLeft8 }}" hint-placeholder-val=""><div onClick="{{ scrollLeft8 }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><span class="material-symbols-outlined" style="font-size:22px">chevron_left</span></div></sc-if>
+          <div ref="{{ navRef8 }}" onScroll="{{ onNavScroll }}" style="position:relative;flex:1;min-width:0;overflow-x:hidden;display:flex;align-items:stretch;flex-wrap:nowrap">
+          <sc-for list="{{ navItems }}" as="nav" hint-placeholder-count="5">
+            <div draggable="{{ nav.draggable }}" onClick="{{ nav.onClick }}" onDragStart="{{ nav.onDragStart }}" onDragOver="{{ nav.onDragOver }}" onDrop="{{ nav.onDrop }}" style="{{ nav.pillStyle }}">
+              <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><span class="material-symbols-outlined" style="font-size:16px;color:#8ba3c7">drag_indicator</span></sc-if>
+              <span class="material-symbols-outlined" style="font-size:19px">{{ nav.icon }}</span>
+              <span>{{ nav.label }}</span>
+              <sc-if value="{{ nav.hasBadge }}" hint-placeholder-val=""><span style="background:#e6a817;color:#3d2a00;font-size:11px;font-weight:700;border-radius:9px;padding:1px 7px">{{ nav.badge }}</span></sc-if>
+              <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><span class="material-symbols-outlined" onClick="{{ nav.onRemove }}" style="font-size:16px;margin-left:3px;color:#c9d6ea;cursor:pointer">close</span></sc-if>
+            </div>
+          </sc-for>
+          </div>
+          <sc-if value="{{ canRight8 }}" hint-placeholder-val="{{ true }}"><div onClick="{{ scrollRight8 }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><span class="material-symbols-outlined" style="font-size:22px">chevron_right</span></div></sc-if>
+          <sc-if value="{{ editing }}" hint-placeholder-val="">
+            <div onClick="{{ toggleAdd }}" style="flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:0 13px;height:34px;margin:7px 3px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1px dashed #5b7cb0;color:#a9c7e8"><span class="material-symbols-outlined" style="font-size:18px">add</span>Add</div>
+          </sc-if>
+          <div onClick="{{ toggleEdit }}" style="{{ customizeStyle }}"><span class="material-symbols-outlined" style="font-size:17px">{{ customizeIcon }}</span>{{ editLabel }}</div>
+          <sc-if value="{{ addOpen }}" hint-placeholder-val="">
+            <div style="position:absolute;top:100%;left:16px;margin-top:6px;z-index:30;width:320px;background:#fff;border:1px solid #dfe1e6;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.22);padding:10px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65;padding:4px 8px 8px">ADD TO TOOLBAR</div>
+              <sc-if value="{{ hasAvailable }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;gap:1px;max-height:260px;overflow:auto">
+                  <sc-for list="{{ available }}" as="opt" hint-placeholder-count="4">
+                    <div onClick="{{ opt.onAdd }}" style="display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:6px;cursor:pointer;font-size:13.5px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:19px;color:#a97400">{{ opt.icon }}</span><span style="flex:1">{{ opt.label }}</span><span class="material-symbols-outlined" style="font-size:18px;color:#565c65">add</span></div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ hasAvailable }}" hint-placeholder-val="">
+                <div style="padding:14px 10px;font-size:13px;color:#565c65;text-align:center">All links are already on your toolbar.</div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+        <!-- content -->
+        <div style="background:#fff;min-height:600px">
+          <div style="padding:26px 32px 22px">
+            <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+            <div style="font-size:13px;color:#565c65;margin-top:2px">Wednesday, July 23</div>
+            <div style="margin-top:16px;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div style="display:inline-flex;border:1px solid #c9ccd0;border-radius:6px;overflow:hidden">
+                  <div style="padding:7px 16px;font-size:13px;font-weight:600;background:#005ea2;color:#fff">Constituent</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0;background:#fff">Invoice</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0;background:#fff">License</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0;background:#fff">Submission</div>
+                </div>
+                <a href="#8a" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;text-decoration:none">Advanced search <span class="material-symbols-outlined" style="font-size:18px">expand_more</span></a>
+              </div>
+              <div style="display:flex;gap:10px">
+                <div style="flex:1;display:flex;align-items:center;gap:10px;border:2px solid #005ea2;border-radius:8px;padding:11px 15px;background:#fff"><span class="material-symbols-outlined" style="font-size:21px;color:#005ea2">search</span><span style="flex:1;font-size:14.5px;color:#565c65">Last name, first name, business, DBA, license #, or email…</span><span style="font-size:11px;color:#565c65;border:1px solid #c9ccd0;border-radius:4px;padding:2px 7px;font-weight:600">⌘K</span></div>
+                <div style="background:#005ea2;color:#fff;border-radius:8px;padding:0 26px;font-size:14.5px;font-weight:700;display:flex;align-items:center">Search</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 32px 32px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.5px;color:#565c65;margin-bottom:14px">QUICK ACTIONS</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+              <a href="#8a" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px;cursor:pointer">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">person_add</span><div style="font-size:16px;font-weight:700;color:#162e51">Create Constituent Account</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up a new constituent account on their behalf.</div>
+              </a>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">send</span><div style="font-size:16px;font-weight:700;color:#162e51">Submit Constituent Application</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Submit an application on behalf of a constituent.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#8a" style="font-size:13.5px;font-weight:600;color:#162e51">Start Submission</a><a href="#8a" style="font-size:13.5px;font-weight:600;color:#162e51">Continue Submission</a></div>
+              </div>
+              <a href="#8a" style="text-decoration:none;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px;cursor:pointer">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">bar_chart</span><div style="font-size:16px;font-weight:700;color:#162e51">Metrics</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View available reports for your agency.</div>
+              </a>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">badge</span><div style="font-size:16px;font-weight:700;color:#162e51">License Types</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up licenses for use in applications.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#8a" style="font-size:13.5px;font-weight:600;color:#162e51">Create New</a><a href="#8a" style="font-size:13.5px;font-weight:600;color:#162e51">View All</a></div>
+              </div>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">description</span><div style="font-size:16px;font-weight:700;color:#162e51">Applications</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View your applications or start a new one.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#8a" style="font-size:13.5px;font-weight:600;color:#162e51">Start New Application</a><a href="#8a" style="font-size:13.5px;font-weight:600;color:#162e51">All Applications</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Try next: "warm the gold accent a touch" · "make the search's Constituent toggle gold too" · "build the Advanced search panel" · "new directions"</p>
+</section>
+
+<section class="dv-turn" id="t7">
+  <div class="dv-thd"><a class="dv-tid" href="#t7">7</a><span class="dv-tname">Color explorations — pulling back the blue</span></div>
+  <p class="dv-intro">Three palettes shown on the toolbar shell from <a class="dv-oid" href="#6a">6a</a> (static, for color only — the live prototype stays at 6a). Each keeps a dark chrome for hierarchy but changes the family: <a class="dv-oid" href="#7a">7a</a> graphite + teal, <a class="dv-oid" href="#7b">7b</a> navy kept but warm gold accents, <a class="dv-oid" href="#7c">7c</a> evergreen + sky. Tell me which to apply and I'll roll it into the working prototype.</p>
+  <div class="dv-opts">
+
+    <!-- 7a graphite + teal -->
+    <div class="dv-opt" id="7a">
+      <div class="dv-olabel"><a class="dv-oid" href="#7a">7a</a><span><b>Graphite + teal</b> — neutral slate chrome, teal accent; no navy at all</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#26313c;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant<span style="color:#9aa7b3;font-weight:400"> — Agency Console</span></span></div>
+          <div style="font-size:13px;color:#c3ccd5">Welcome, Dana</div>
+        </div>
+        <div style="background:#323f4b;display:flex;align-items:stretch;padding:0 16px;min-height:48px;color:#c3ccd5;font-size:14px;font-weight:600">
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px;color:#fff;border-bottom:3px solid #12b3a6;background:rgba(255,255,255,.06)"><span class="material-symbols-outlined" style="font-size:19px">home</span>Home</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">assignment</span>My Tasks<span style="background:#12b3a6;color:#04302c;font-size:11px;font-weight:700;border-radius:9px;padding:1px 7px">12</span></div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">inbox</span>Queues</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">description</span>Applications</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">bar_chart</span>Metrics</div>
+        </div>
+        <div style="background:#fff;padding:26px 32px 30px">
+          <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+          <div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21</div>
+          <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#0c7d73">person_add</span><div style="font-size:15px;font-weight:700;color:#1a3c39">Create Account</div></div><div style="font-size:13px;color:#565c65">Set up a constituent account.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1"><span style="font-size:13px;font-weight:600;color:#0c7d73">Create Account</span></div></div>
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#0c7d73">send</span><div style="font-size:15px;font-weight:700;color:#1a3c39">Submit Application</div></div><div style="font-size:13px;color:#565c65">Submit on a constituent's behalf.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1;display:flex;gap:14px"><span style="font-size:13px;font-weight:600;color:#0c7d73">Start</span><span style="font-size:13px;font-weight:600;color:#0c7d73">Continue</span></div></div>
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#0c7d73">badge</span><div style="font-size:15px;font-weight:700;color:#1a3c39">License Types</div></div><div style="font-size:13px;color:#565c65">Set up licenses for applications.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1;display:flex;gap:14px"><span style="font-size:13px;font-weight:600;color:#0c7d73">Create New</span><span style="font-size:13px;font-weight:600;color:#0c7d73">View All</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7b navy kept + gold accent -->
+    <div class="dv-opt" id="7b">
+      <div class="dv-olabel"><a class="dv-oid" href="#7b">7b</a><span><b>Navy + warm gold</b> — familiar navy chrome, but actions/accents go warm</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="font-size:13px;color:#dbe4f0">Welcome, Dana</div>
+        </div>
+        <div style="background:#1b3763;display:flex;align-items:stretch;padding:0 16px;min-height:48px;color:#cdd9ea;font-size:14px;font-weight:600">
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px;color:#fff;border-bottom:3px solid #e6a817;background:rgba(255,255,255,.06)"><span class="material-symbols-outlined" style="font-size:19px">home</span>Home</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">assignment</span>My Tasks<span style="background:#e6a817;color:#3d2a00;font-size:11px;font-weight:700;border-radius:9px;padding:1px 7px">12</span></div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">inbox</span>Queues</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">description</span>Applications</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">bar_chart</span>Metrics</div>
+        </div>
+        <div style="background:#fff;padding:26px 32px 30px">
+          <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+          <div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21</div>
+          <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">person_add</span><div style="font-size:15px;font-weight:700;color:#162e51">Create Account</div></div><div style="font-size:13px;color:#565c65">Set up a constituent account.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1"><span style="font-size:13px;font-weight:600;color:#162e51">Create Account</span></div></div>
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">send</span><div style="font-size:15px;font-weight:700;color:#162e51">Submit Application</div></div><div style="font-size:13px;color:#565c65">Submit on a constituent's behalf.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1;display:flex;gap:14px"><span style="font-size:13px;font-weight:600;color:#162e51">Start</span><span style="font-size:13px;font-weight:600;color:#162e51">Continue</span></div></div>
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#a97400">badge</span><div style="font-size:15px;font-weight:700;color:#162e51">License Types</div></div><div style="font-size:13px;color:#565c65">Set up licenses for applications.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1;display:flex;gap:14px"><span style="font-size:13px;font-weight:600;color:#162e51">Create New</span><span style="font-size:13px;font-weight:600;color:#162e51">View All</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7c evergreen + sky -->
+    <div class="dv-opt" id="7c">
+      <div class="dv-olabel"><a class="dv-oid" href="#7c">7c</a><span><b>Evergreen + sky</b> — deep green chrome (Forge-like), calm sky-blue accent</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#12362b;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant<span style="color:#93b3a5;font-weight:400"> — Agency Console</span></span></div>
+          <div style="font-size:13px;color:#cbe0d5">Welcome, Dana</div>
+        </div>
+        <div style="background:#1c4a3b;display:flex;align-items:stretch;padding:0 16px;min-height:48px;color:#bcd4c8;font-size:14px;font-weight:600">
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px;color:#fff;border-bottom:3px solid #6cc0a6;background:rgba(255,255,255,.06)"><span class="material-symbols-outlined" style="font-size:19px">home</span>Home</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">assignment</span>My Tasks<span style="background:#6cc0a6;color:#0c2c22;font-size:11px;font-weight:700;border-radius:9px;padding:1px 7px">12</span></div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">inbox</span>Queues</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">description</span>Applications</div>
+          <div style="display:flex;align-items:center;gap:7px;padding:0 15px"><span class="material-symbols-outlined" style="font-size:19px">bar_chart</span>Metrics</div>
+        </div>
+        <div style="background:#fff;padding:26px 32px 30px">
+          <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+          <div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21</div>
+          <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#12674f">person_add</span><div style="font-size:15px;font-weight:700;color:#123c30">Create Account</div></div><div style="font-size:13px;color:#565c65">Set up a constituent account.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1"><span style="font-size:13px;font-weight:600;color:#12674f">Create Account</span></div></div>
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#12674f">send</span><div style="font-size:15px;font-weight:700;color:#123c30">Submit Application</div></div><div style="font-size:13px;color:#565c65">Submit on a constituent's behalf.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1;display:flex;gap:14px"><span style="font-size:13px;font-weight:600;color:#12674f">Start</span><span style="font-size:13px;font-weight:600;color:#12674f">Continue</span></div></div>
+            <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:22px;color:#12674f">badge</span><div style="font-size:15px;font-weight:700;color:#123c30">License Types</div></div><div style="font-size:13px;color:#565c65">Set up licenses for applications.</div><div style="margin-top:12px;padding-top:10px;border-top:1px solid #eceef1;display:flex;gap:14px"><span style="font-size:13px;font-weight:600;color:#12674f">Create New</span><span style="font-size:13px;font-weight:600;color:#12674f">View All</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "apply <a class="dv-oid" href="#7a">7a</a> to the working prototype" · "warm the gold in <a class="dv-oid" href="#7b">7b</a> a touch" · "show a two-tone: navy chrome + teal accent" · "new directions"</p>
+</section>
+
+<section class="dv-turn" id="t6">
+  <div class="dv-thd"><a class="dv-tid" href="#t6">6</a><span class="dv-tname">New idea — a customizable toolbar (working prototype)</span></div>
+  <p class="dv-intro">Exploration only — kept separate from <a class="dv-oid" href="#5a">5a</a>. The top nav becomes a toolbar each user tailors, like a browser bookmarks bar or a Figma/Sketch toolbar. Click <b>Customize</b> to enter edit mode, then <b>drag pills to reorder</b>, <b>✕ to remove</b>, and <b>+ Add</b> to pull from the full catalog (which already includes the upcoming Case Management, Flags, Inspections, Denials, Appeals). Try it — it's live.</p>
+  <div class="dv-opts">
+    <div class="dv-opt" id="6a">
+      <div class="dv-olabel"><a class="dv-oid" href="#6a">6a</a><span><b>Customizable toolbar</b> — add / remove / reorder, saved per user</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><span>Welcome, Dana</span><span style="color:#3d557d">|</span><a href="#6a" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#6a" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <!-- customizable toolbar -->
+        <div style="background:#1b3763;position:relative;display:flex;align-items:stretch;padding:0 8px;min-height:48px">
+          <sc-if value="{{ canLeft }}" hint-placeholder-val=""><div onClick="{{ scrollLeft }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><span class="material-symbols-outlined" style="font-size:22px">chevron_left</span></div></sc-if>
+          <div ref="{{ navRef }}" onScroll="{{ onNavScroll }}" style="position:relative;flex:1;min-width:0;overflow-x:hidden;display:flex;align-items:stretch;flex-wrap:nowrap">
+          <sc-for list="{{ navItems }}" as="nav" hint-placeholder-count="5">
+            <div draggable="{{ nav.draggable }}" onClick="{{ nav.onClick }}" onDragStart="{{ nav.onDragStart }}" onDragOver="{{ nav.onDragOver }}" onDrop="{{ nav.onDrop }}" style="{{ nav.pillStyle }}">
+              <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><span class="material-symbols-outlined" style="font-size:16px;color:#8ba3c7">drag_indicator</span></sc-if>
+              <span class="material-symbols-outlined" style="font-size:19px">{{ nav.icon }}</span>
+              <span>{{ nav.label }}</span>
+              <sc-if value="{{ nav.hasBadge }}" hint-placeholder-val=""><span style="background:#e6a817;color:#3d2a00;font-size:11px;font-weight:700;border-radius:9px;padding:1px 7px">{{ nav.badge }}</span></sc-if>
+              <sc-if value="{{ nav.editing }}" hint-placeholder-val=""><span class="material-symbols-outlined" onClick="{{ nav.onRemove }}" style="font-size:16px;margin-left:3px;color:#c9d6ea;cursor:pointer">close</span></sc-if>
+            </div>
+          </sc-for>
+          </div>
+          <sc-if value="{{ canRight }}" hint-placeholder-val="{{ true }}"><div onClick="{{ scrollRight }}" style="flex:0 0 auto;width:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#dbe4f0;background:rgba(0,0,0,.18)"><span class="material-symbols-outlined" style="font-size:22px">chevron_right</span></div></sc-if>
+          <sc-if value="{{ editing }}" hint-placeholder-val="">
+            <div onClick="{{ toggleAdd }}" style="flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:0 13px;height:34px;margin:7px 3px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;border:1px dashed #5b7cb0;color:#a9c7e8"><span class="material-symbols-outlined" style="font-size:18px">add</span>Add</div>
+          </sc-if>
+          <div onClick="{{ toggleEdit }}" style="{{ customizeStyle }}"><span class="material-symbols-outlined" style="font-size:17px">{{ customizeIcon }}</span>{{ editLabel }}</div>
+          <sc-if value="{{ addOpen }}" hint-placeholder-val="">
+            <div style="position:absolute;top:100%;left:16px;margin-top:6px;z-index:30;width:320px;background:#fff;border:1px solid #dfe1e6;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.22);padding:10px">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65;padding:4px 8px 8px">ADD TO TOOLBAR</div>
+              <sc-if value="{{ hasAvailable }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;gap:1px;max-height:260px;overflow:auto">
+                  <sc-for list="{{ available }}" as="opt" hint-placeholder-count="4">
+                    <div onClick="{{ opt.onAdd }}" style="display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:6px;cursor:pointer;font-size:13.5px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:19px;color:#a97400">{{ opt.icon }}</span><span style="flex:1">{{ opt.label }}</span><span class="material-symbols-outlined" style="font-size:18px;color:#565c65">add</span></div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ hasAvailable }}" hint-placeholder-val="">
+                <div style="padding:14px 10px;font-size:13px;color:#565c65;text-align:center">All links are already on your toolbar.</div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+        <!-- main -->
+        <div style="background:#fff;min-height:560px;padding:28px 32px">
+          <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+          <div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21</div>
+          <div style="margin-top:20px;display:flex;gap:14px;align-items:flex-start;background:#fdf6e6;border:1px solid #f0dfae;border-left:4px solid #e6a817;border-radius:6px;padding:16px 18px;max-width:820px">
+            <span class="material-symbols-outlined" style="font-size:22px;color:#a97400">tune</span>
+            <div style="font-size:13.5px;color:#1b1b1b;line-height:1.55">
+              <b>Make this toolbar yours.</b> Click <b>Customize</b> (top-right of the blue bar), then <b>drag</b> to reorder, <b>✕</b> to remove, and <b>+ Add</b> to insert links from the catalog. Links never wrap — when there are more than fit, a chevron appears on each side and scrolls the row one link at a time. Your layout saves to your profile, so a records clerk can keep just My Tasks &amp; Queues while a supervisor pins everything.
+            </div>
+          </div>
+          <div style="margin-top:24px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#565c65">ADD MODULES LIKELY COMING SOON</div>
+          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:10px">
+            <div style="display:flex;align-items:center;gap:8px;border:1px solid #dfe1e6;border-radius:20px;padding:7px 14px;font-size:13px;color:#3d4551"><span class="material-symbols-outlined" style="font-size:18px;color:#565c65">folder_open</span>Case Management</div>
+            <div style="display:flex;align-items:center;gap:8px;border:1px solid #dfe1e6;border-radius:20px;padding:7px 14px;font-size:13px;color:#3d4551"><span class="material-symbols-outlined" style="font-size:18px;color:#565c65">flag</span>Flags</div>
+            <div style="display:flex;align-items:center;gap:8px;border:1px solid #dfe1e6;border-radius:20px;padding:7px 14px;font-size:13px;color:#3d4551"><span class="material-symbols-outlined" style="font-size:18px;color:#565c65">fact_check</span>Inspections</div>
+            <div style="display:flex;align-items:center;gap:8px;border:1px solid #dfe1e6;border-radius:20px;padding:7px 14px;font-size:13px;color:#3d4551"><span class="material-symbols-outlined" style="font-size:18px;color:#565c65">block</span>Denials</div>
+            <div style="display:flex;align-items:center;gap:8px;border:1px solid #dfe1e6;border-radius:20px;padding:7px 14px;font-size:13px;color:#3d4551"><span class="material-symbols-outlined" style="font-size:18px;color:#565c65">gavel</span>Appeals</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Try next: "let users rename or group links" · "add role-based default toolbars" · "make the Add menu searchable" · "auto-scroll the active link into view"</p>
+</section>
+
+<section class="dv-turn" id="t5">
+  <div class="dv-thd"><a class="dv-tid" href="#t5">5</a><span class="dv-tname">Refined <a class="dv-oid" href="#1b">1b</a> — top-nav tabs, our latest updates applied</span></div>
+  <p class="dv-intro">Back to the top-nav tab bar from <a class="dv-oid" href="#1b">1b</a> (kept, per your note), refined with everything since: no KPI band / stats / revenue, search promoted to the top with type toggles + advanced link, and the classic action tiles as a card grid below (from <a class="dv-oid" href="#4a">4a</a>).</p>
+  <div class="dv-opts">
+    <div class="dv-opt" id="5a">
+      <div class="dv-olabel"><a class="dv-oid" href="#5a">5a</a><span><b>Top-nav + search + card grid</b></span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><span>Welcome, Dana</span><span style="color:#3d557d">|</span><a href="#5a" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#5a" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <!-- tab bar -->
+        <div style="background:#1b3763;display:flex;align-items:stretch;padding:0 28px;color:#cdd9ea;font-size:14px;font-weight:600">
+          <div style="padding:13px 18px;color:#fff;border-bottom:3px solid #fff;background:rgba(255,255,255,.06)">Home</div>
+          <div style="padding:13px 18px">My Tasks</div>
+          <div style="padding:13px 18px">Queues</div>
+          <div style="padding:13px 18px">Constituents</div>
+          <div style="padding:13px 18px">License Types</div>
+          <div style="padding:13px 18px">Applications</div>
+          <div style="padding:13px 18px">Metrics</div>
+          <div style="padding:13px 18px">Settings</div>
+        </div>
+        <div style="background:#fff;min-height:640px">
+          <div style="padding:26px 32px 22px">
+            <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+            <div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21</div>
+            <!-- search bar on top -->
+            <div style="margin-top:16px;background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div style="display:inline-flex;border:1px solid #c9ccd0;border-radius:6px;overflow:hidden">
+                  <div style="padding:7px 16px;font-size:13px;font-weight:600;background:#005ea2;color:#fff">Constituent</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0">Invoice</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0">License</div>
+                  <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0">Submission</div>
+                </div>
+                <a href="#3b" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;text-decoration:none">Advanced search <span class="material-symbols-outlined" style="font-size:18px">expand_more</span></a>
+              </div>
+              <div style="display:flex;gap:10px">
+                <div style="flex:1;display:flex;align-items:center;gap:10px;border:2px solid #005ea2;border-radius:8px;padding:11px 15px;background:#fff"><span class="material-symbols-outlined" style="font-size:21px;color:#005ea2">search</span><span style="flex:1;font-size:14.5px;color:#565c65">Last name, first name, business, DBA, license #, or email…</span><span style="font-size:11px;color:#565c65;border:1px solid #c9ccd0;border-radius:4px;padding:2px 7px;font-weight:600">⌘K</span></div>
+                <div style="background:#005ea2;color:#fff;border-radius:8px;padding:0 26px;font-size:14.5px;font-weight:700;display:flex;align-items:center">Search</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 32px 32px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.5px;color:#565c65;margin-bottom:14px">QUICK ACTIONS</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">person_add</span><div style="font-size:16px;font-weight:700;color:#162e51">Create Constituent Account</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up a new constituent account on their behalf.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1"><a href="#5a" style="font-size:13.5px;font-weight:600">Create Account</a></div>
+              </div>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">send</span><div style="font-size:16px;font-weight:700;color:#162e51">Submit Constituent Application</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Submit an application on behalf of a constituent.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#5a" style="font-size:13.5px;font-weight:600">Start Submission</a><a href="#5a" style="font-size:13.5px;font-weight:600">Continue Submission</a></div>
+              </div>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">bar_chart</span><div style="font-size:16px;font-weight:700;color:#162e51">Metrics</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View available reports for your agency.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1"><a href="#5a" style="font-size:13.5px;font-weight:600">View reports</a></div>
+              </div>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">badge</span><div style="font-size:16px;font-weight:700;color:#162e51">License Types</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up licenses for use in applications.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#5a" style="font-size:13.5px;font-weight:600">Create New</a><a href="#5a" style="font-size:13.5px;font-weight:600">View All</a></div>
+              </div>
+              <div style="background:#fafafa;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">description</span><div style="font-size:16px;font-weight:700;color:#162e51">Applications</div></div>
+                <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View your applications or start a new one.</div>
+                <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#5a" style="font-size:13.5px;font-weight:600">Start New Application</a><a href="#5a" style="font-size:13.5px;font-weight:600">All Applications</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Try next: "add a search field into the top bar itself" · "tighten the cards to two rows" · "build the Advanced search page" · "new directions"</p>
+</section>
+
+<section class="dv-turn" id="t4">
+  <div class="dv-thd"><a class="dv-tid" href="#t4">4</a><span class="dv-tname">Tiles back in the main content — closer to today's layout</span></div>
+  <p class="dv-intro">Same 3.0 shell and search from <a class="dv-oid" href="#3a">3a</a>, but the action tiles move back into the main content as a familiar card grid (like the current homepage), so the sidebar reverts to plain nav links — a smaller leap for agency staff. Search sits on top; the classic cards sit below with their one- or two-action links intact.</p>
+  <div class="dv-opts">
+    <div class="dv-opt" id="4a">
+      <div class="dv-olabel"><a class="dv-oid" href="#4a">4a</a><span><b>Search on top, card grid below</b> — lightweight sidebar nav</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:56px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#4a" style="color:#dbe4f0;text-decoration:none">State Portal</a><span style="color:#3d557d">|</span><a href="#4a" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#4a" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <div style="display:flex;min-height:700px">
+          <!-- lightweight sidebar nav -->
+          <div style="width:264px;flex:none;background:#fff;border-right:1px solid #dfe1e6;padding:16px 0">
+            <div style="padding:0 12px;display:flex;flex-direction:column;gap:1px">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;background:#eef4fb;border-left:3px solid #005ea2;font-size:14px;font-weight:600;color:#162e51"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">home</span>Home</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">assignment</span>My Tasks</span><span style="background:#005ea2;color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">12</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">inbox</span>Queues</span><span style="background:#e6e9ec;color:#3d4551;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">48</span></div>
+            </div>
+            <div style="padding:16px 22px 6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CONSTITUENTS</div>
+            <div style="padding:0 12px;display:flex;flex-direction:column;gap:1px">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">search</span>Search</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">person_add</span>Create Account</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">send</span>Submit Application</div>
+            </div>
+            <div style="padding:16px 22px 6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CATALOG &amp; INSIGHTS</div>
+            <div style="padding:0 12px;display:flex;flex-direction:column;gap:1px">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">badge</span>License Types</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">description</span>Applications</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">bar_chart</span>Metrics</div>
+            </div>
+          </div>
+          <!-- main -->
+          <div style="flex:1;background:#f7f9fb;padding:0">
+            <div style="padding:26px 32px 22px">
+              <div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+              <div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21 · Dept. of Natural Resources</div>
+              <!-- search bar on top -->
+              <div style="margin-top:16px;background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                  <div style="display:inline-flex;border:1px solid #c9ccd0;border-radius:6px;overflow:hidden">
+                    <div style="padding:7px 16px;font-size:13px;font-weight:600;background:#005ea2;color:#fff">Constituent</div>
+                    <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0">Invoice</div>
+                    <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0">License</div>
+                    <div style="padding:7px 16px;font-size:13px;color:#1b1b1b;border-left:1px solid #c9ccd0">Submission</div>
+                  </div>
+                  <a href="#3b" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;text-decoration:none">Advanced search <span class="material-symbols-outlined" style="font-size:18px">expand_more</span></a>
+                </div>
+                <div style="display:flex;gap:10px">
+                  <div style="flex:1;display:flex;align-items:center;gap:10px;border:2px solid #005ea2;border-radius:8px;padding:11px 15px;background:#fff"><span class="material-symbols-outlined" style="font-size:21px;color:#005ea2">search</span><span style="flex:1;font-size:14.5px;color:#565c65">Last name, first name, business, DBA, license #, or email…</span><span style="font-size:11px;color:#565c65;border:1px solid #c9ccd0;border-radius:4px;padding:2px 7px;font-weight:600">⌘K</span></div>
+                  <div style="background:#005ea2;color:#fff;border-radius:8px;padding:0 26px;font-size:14.5px;font-weight:700;display:flex;align-items:center">Search</div>
+                </div>
+              </div>
+            </div>
+            <!-- card grid -->
+            <div style="padding:0 32px 32px">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.5px;color:#565c65;margin-bottom:14px">QUICK ACTIONS</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+                <!-- Create Constituent Account -->
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">person_add</span><div style="font-size:16px;font-weight:700;color:#162e51">Create Constituent Account</div></div>
+                  <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up a new constituent account on their behalf.</div>
+                  <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1"><a href="#4a" style="font-size:13.5px;font-weight:600">Create Account</a></div>
+                </div>
+                <!-- Submit Constituent Application -->
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">send</span><div style="font-size:16px;font-weight:700;color:#162e51">Submit Constituent Application</div></div>
+                  <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Submit an application on behalf of a constituent.</div>
+                  <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#4a" style="font-size:13.5px;font-weight:600">Start Submission</a><a href="#4a" style="font-size:13.5px;font-weight:600">Continue Submission</a></div>
+                </div>
+                <!-- Metrics -->
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">bar_chart</span><div style="font-size:16px;font-weight:700;color:#162e51">Metrics</div></div>
+                  <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View available reports for your agency.</div>
+                  <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1"><a href="#4a" style="font-size:13.5px;font-weight:600">View reports</a></div>
+                </div>
+                <!-- License Types -->
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">badge</span><div style="font-size:16px;font-weight:700;color:#162e51">License Types</div></div>
+                  <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">Set up licenses for use in applications.</div>
+                  <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#4a" style="font-size:13.5px;font-weight:600">Create New</a><a href="#4a" style="font-size:13.5px;font-weight:600">View All</a></div>
+                </div>
+                <!-- Applications -->
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;min-height:170px">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">description</span><div style="font-size:16px;font-weight:700;color:#162e51">Applications</div></div>
+                  <div style="font-size:13.5px;color:#565c65;line-height:1.5;flex:1">View your applications or start a new one.</div>
+                  <div style="margin-top:14px;padding-top:12px;border-top:1px solid #eceef1;display:flex;justify-content:space-between;gap:16px"><a href="#4a" style="font-size:13.5px;font-weight:600">Start New Application</a><a href="#4a" style="font-size:13.5px;font-weight:600">All Applications</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Try next: "drop the search type toggles into a simpler single bar" · "add icons/color to the cards" · "compare <a class="dv-oid" href="#4a">4a</a> and <a class="dv-oid" href="#3a">3a</a> side by side" · "new directions"</p>
+</section>
+
+<section class="dv-turn" id="t3">
+  <div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Home, stripped to search — no stats or data</span></div>
+  <p class="dv-intro">Following <a class="dv-oid" href="#2a">2a</a>, with "My day" and all metrics/revenue removed — the agency has no dashboard data concept yet. Search becomes the centerpiece since staff use it constantly, with search-type toggles (Constituent / Invoice / License / Submission, from the real Search screen) and an Advanced search affordance. <a class="dv-oid" href="#3a">3a</a> keeps advanced collapsed; <a class="dv-oid" href="#3b">3b</a> shows it expanded inline so you can see where the fuller field set lands.</p>
+  <div class="dv-opts">
+
+    <!-- ===== 3a — minimal search home ===== -->
+    <div class="dv-opt" id="3a">
+      <div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a><span><b>Minimal</b> — primary search + type toggles, advanced collapsed</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:56px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#3a" style="color:#dbe4f0;text-decoration:none">State Portal</a><span style="color:#3d557d">|</span><a href="#3a" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#3a" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <div style="display:flex;min-height:640px">
+          <!-- tile sidebar (from 2a) -->
+          <div style="width:300px;flex:none;background:#fff;border-right:1px solid #dfe1e6;padding:16px 0 24px">
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:2px">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;background:#eef4fb;border-left:3px solid #005ea2;font-size:14px;font-weight:600;color:#162e51"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">home</span>Home</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">assignment</span>My Tasks</span><span style="background:#005ea2;color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">12</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">inbox</span>Queues</span><span style="background:#e6e9ec;color:#3d4551;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">48</span></div>
+            </div>
+            <div style="height:1px;background:#eceef1;margin:14px 20px"></div>
+            <div style="padding:0 22px 8px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CONSTITUENTS</div>
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:8px">
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px;display:flex;align-items:center;gap:11px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">person_add</span><div><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Create Account</div><a href="#3a" style="font-size:12px">Create constituent account</a></div></div>
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">send</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Submit Application</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#3a" style="font-size:12px">Start</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#3a" style="font-size:12px">Continue</a></div>
+              </div>
+            </div>
+            <div style="height:1px;background:#eceef1;margin:14px 20px"></div>
+            <div style="padding:0 22px 8px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CATALOG &amp; INSIGHTS</div>
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:8px">
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">badge</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">License Types</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#3a" style="font-size:12px">Create New</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#3a" style="font-size:12px">View All</a></div>
+              </div>
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">description</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Applications</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#3a" style="font-size:12px">Start New</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#3a" style="font-size:12px">All Applications</a></div>
+              </div>
+            </div>
+          </div>
+          <!-- main: search-only -->
+          <div style="flex:1;background:#eef1f5;display:flex;flex-direction:column">
+            <div style="padding:32px 40px 0"><div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div><div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21 · Dept. of Natural Resources</div></div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:0 40px 60px">
+              <div style="width:100%;max-width:760px;background:#fff;border:1px solid #dfe1e6;border-radius:10px;box-shadow:0 2px 12px rgba(22,46,81,.06);padding:28px 30px">
+                <div style="font-size:17px;font-weight:700;color:#1b1b1b;margin-bottom:4px">Search</div>
+                <div style="font-size:13px;color:#565c65;margin-bottom:16px">Choose a type, then enter your search terms.</div>
+                <!-- segmented type control -->
+                <div style="display:inline-flex;border:1px solid #c9ccd0;border-radius:6px;overflow:hidden;margin-bottom:16px">
+                  <div style="padding:8px 18px;font-size:13.5px;font-weight:600;background:#005ea2;color:#fff">Constituent</div>
+                  <div style="padding:8px 18px;font-size:13.5px;color:#1b1b1b;border-left:1px solid #c9ccd0">Invoice</div>
+                  <div style="padding:8px 18px;font-size:13.5px;color:#1b1b1b;border-left:1px solid #c9ccd0">License</div>
+                  <div style="padding:8px 18px;font-size:13.5px;color:#1b1b1b;border-left:1px solid #c9ccd0">Submission</div>
+                </div>
+                <!-- primary search field -->
+                <div style="display:flex;gap:10px">
+                  <div style="flex:1;display:flex;align-items:center;gap:10px;border:2px solid #005ea2;border-radius:8px;padding:12px 16px;background:#fff;box-shadow:0 1px 4px rgba(0,94,162,.1)"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">search</span><span style="flex:1;font-size:15px;color:#565c65">Last name, first name, business, or DBA…</span><span style="font-size:11px;color:#565c65;border:1px solid #c9ccd0;border-radius:4px;padding:2px 7px;font-weight:600">⌘K</span></div>
+                  <div style="background:#005ea2;color:#fff;border-radius:8px;padding:0 26px;font-size:15px;font-weight:700;display:flex;align-items:center">Search</div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px">
+                  <div style="font-size:12.5px;color:#565c65">Tip: search by license #, customer #, or email too.</div>
+                  <a href="#3b" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;text-decoration:none">Advanced search <span class="material-symbols-outlined" style="font-size:18px">expand_more</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 3b — advanced expanded ===== -->
+    <div class="dv-opt" id="3b">
+      <div class="dv-olabel"><a class="dv-oid" href="#3b">3b</a><span><b>Advanced expanded</b> — additional criteria revealed inline</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:56px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#3b" style="color:#dbe4f0;text-decoration:none">State Portal</a><span style="color:#3d557d">|</span><a href="#3b" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#3b" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <div style="display:flex;min-height:640px">
+          <!-- tile sidebar -->
+          <div style="width:300px;flex:none;background:#fff;border-right:1px solid #dfe1e6;padding:16px 0 24px">
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:2px">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;background:#eef4fb;border-left:3px solid #005ea2;font-size:14px;font-weight:600;color:#162e51"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">home</span>Home</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">assignment</span>My Tasks</span><span style="background:#005ea2;color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">12</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">inbox</span>Queues</span><span style="background:#e6e9ec;color:#3d4551;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">48</span></div>
+            </div>
+            <div style="height:1px;background:#eceef1;margin:14px 20px"></div>
+            <div style="padding:0 22px 8px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CONSTITUENTS</div>
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:8px">
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px;display:flex;align-items:center;gap:11px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">person_add</span><div><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Create Account</div><a href="#3b" style="font-size:12px">Create constituent account</a></div></div>
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">send</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Submit Application</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#3b" style="font-size:12px">Start</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#3b" style="font-size:12px">Continue</a></div>
+              </div>
+            </div>
+            <div style="height:1px;background:#eceef1;margin:14px 20px"></div>
+            <div style="padding:0 22px 8px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CATALOG &amp; INSIGHTS</div>
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:8px">
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">badge</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">License Types</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#3b" style="font-size:12px">Create New</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#3b" style="font-size:12px">View All</a></div>
+              </div>
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">description</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Applications</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#3b" style="font-size:12px">Start New</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#3b" style="font-size:12px">All Applications</a></div>
+              </div>
+            </div>
+          </div>
+          <!-- main: search with advanced open -->
+          <div style="flex:1;background:#eef1f5;overflow:auto">
+            <div style="padding:32px 40px 0"><div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div><div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21 · Dept. of Natural Resources</div></div>
+            <div style="padding:22px 40px 44px">
+              <div style="max-width:900px;margin:0 auto;background:#fff;border:1px solid #dfe1e6;border-radius:10px;box-shadow:0 2px 12px rgba(22,46,81,.06);padding:26px 30px">
+                <div style="font-size:17px;font-weight:700;color:#1b1b1b;margin-bottom:14px">Search</div>
+                <div style="display:inline-flex;border:1px solid #c9ccd0;border-radius:6px;overflow:hidden;margin-bottom:16px">
+                  <div style="padding:8px 18px;font-size:13.5px;font-weight:600;background:#005ea2;color:#fff">Constituent</div>
+                  <div style="padding:8px 18px;font-size:13.5px;color:#1b1b1b;border-left:1px solid #c9ccd0">Invoice</div>
+                  <div style="padding:8px 18px;font-size:13.5px;color:#1b1b1b;border-left:1px solid #c9ccd0">License</div>
+                  <div style="padding:8px 18px;font-size:13.5px;color:#1b1b1b;border-left:1px solid #c9ccd0">Submission</div>
+                </div>
+                <div style="display:flex;gap:10px;margin-bottom:20px">
+                  <div style="flex:1;display:flex;align-items:center;gap:10px;border:2px solid #005ea2;border-radius:8px;padding:12px 16px;background:#fff"><span class="material-symbols-outlined" style="font-size:22px;color:#005ea2">search</span><span style="flex:1;font-size:15px;color:#565c65">Last name, first name, business, or DBA…</span></div>
+                  <div style="background:#005ea2;color:#fff;border-radius:8px;padding:0 26px;font-size:15px;font-weight:700;display:flex;align-items:center">Search</div>
+                </div>
+                <!-- advanced panel -->
+                <div style="border-top:1px solid #eceef1;padding-top:18px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div style="font-size:14px;font-weight:700;color:#1b1b1b">Advanced criteria</div><a href="#3a" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;text-decoration:none">Collapse <span class="material-symbols-outlined" style="font-size:18px">expand_less</span></a></div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px 18px">
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">Email</div><div style="border:1px solid #565c65;border-radius:4px;height:38px"></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">FEIN Number</div><div style="border:1px solid #565c65;border-radius:4px;height:38px"></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">Customer Number</div><div style="border:1px solid #565c65;border-radius:4px;height:38px"></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">License Number</div><div style="border:1px solid #565c65;border-radius:4px;height:38px"></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">License Type</div><div style="border:1px solid #565c65;border-radius:4px;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#565c65;font-size:13px">Please select <span class="material-symbols-outlined" style="font-size:18px;color:#565c65">unfold_more</span></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">Submission Status</div><div style="border:1px solid #565c65;border-radius:4px;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#565c65;font-size:13px">Please select <span class="material-symbols-outlined" style="font-size:18px;color:#565c65">unfold_more</span></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">Submission Number</div><div style="border:1px solid #565c65;border-radius:4px;height:38px"></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">Submitted — Start</div><div style="border:1px solid #565c65;border-radius:4px;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#565c65;font-size:13px">mm/dd/yyyy <span class="material-symbols-outlined" style="font-size:18px;color:#565c65">calendar_month</span></div></div>
+                    <div><div style="font-size:12.5px;font-weight:600;color:#3d4551;margin-bottom:5px">Submitted — End</div><div style="border:1px solid #565c65;border-radius:4px;height:38px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#565c65;font-size:13px">mm/dd/yyyy <span class="material-symbols-outlined" style="font-size:18px;color:#565c65">calendar_month</span></div></div>
+                  </div>
+                  <div style="display:flex;gap:10px;margin-top:20px">
+                    <div style="background:#005ea2;color:#fff;border-radius:6px;padding:10px 26px;font-size:14px;font-weight:700">Search</div>
+                    <div style="border:1px solid #005ea2;color:#005ea2;border-radius:6px;padding:10px 22px;font-size:14px;font-weight:700">Clear</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "make Advanced search its own full page" · "build the search results table" · "tighten the empty space in <a class="dv-oid" href="#3a">3a</a>" · "new directions"</p>
+</section>
+
+<section class="dv-turn" id="t2">
+  <div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Refined <a class="dv-oid" href="#1c">1c</a> — action tiles moved into the left nav</span></div>
+  <p class="dv-intro">The command bar + "My day" work focus + metric tiles from <a class="dv-oid" href="#1c">1c</a>, with the left rail rebuilt as a stack of action tiles. Workspace nav (Home / My Tasks / Queues) sits at top; below it, each homepage tile lives in the sidebar, and tiles with two actions — Submit Application, License Types, Applications — expose both links inline.</p>
+  <div class="dv-opts">
+    <div class="dv-opt" id="2a">
+      <div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a><span><b>Command layout + tile sidebar</b> — two-action tiles carry both links</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:56px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#2a" style="color:#dbe4f0;text-decoration:none">State Portal</a><span style="color:#3d557d">|</span><a href="#2a" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#2a" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <div style="display:flex;min-height:720px">
+          <!-- tile sidebar -->
+          <div style="width:300px;flex:none;background:#fff;border-right:1px solid #dfe1e6;padding:16px 0 24px">
+            <!-- workspace nav -->
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:2px">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:6px;background:#eef4fb;border-left:3px solid #005ea2;font-size:14px;font-weight:600;color:#162e51"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">home</span>Home</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">assignment</span>My Tasks</span><span style="background:#005ea2;color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">12</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:6px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">inbox</span>Queues</span><span style="background:#e6e9ec;color:#3d4551;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">48</span></div>
+            </div>
+            <div style="height:1px;background:#eceef1;margin:14px 20px"></div>
+            <div style="padding:0 22px 8px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CONSTITUENTS</div>
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:8px">
+              <!-- Create Account (single) -->
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px;display:flex;align-items:center;gap:11px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">person_add</span><div><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Create Account</div><a href="#2a" style="font-size:12px">Create constituent account</a></div></div>
+              <!-- Submit Application (two actions) -->
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">send</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Submit Application</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#2a" style="font-size:12px">Start</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#2a" style="font-size:12px">Continue</a></div>
+              </div>
+            </div>
+            <div style="height:1px;background:#eceef1;margin:14px 20px"></div>
+            <div style="padding:0 22px 8px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CATALOG &amp; INSIGHTS</div>
+            <div style="padding:0 14px;display:flex;flex-direction:column;gap:8px">
+              <!-- License Types (two actions) -->
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">badge</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">License Types</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#2a" style="font-size:12px">Create New</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#2a" style="font-size:12px">View All</a></div>
+              </div>
+              <!-- Applications (two actions) -->
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px">
+                <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">description</span><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Applications</div></div>
+                <div style="display:flex;gap:8px;padding-left:31px"><a href="#2a" style="font-size:12px">Start New</a><span style="color:#c9ccd0;font-size:12px">·</span><a href="#2a" style="font-size:12px">All Applications</a></div>
+              </div>
+              <!-- Metrics (single) -->
+              <div style="border:1px solid #e6e9ec;border-radius:8px;padding:11px 13px;display:flex;align-items:center;gap:11px"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">bar_chart</span><div><div style="font-size:13.5px;font-weight:600;color:#1b1b1b">Metrics</div><a href="#2a" style="font-size:12px">View reports</a></div></div>
+            </div>
+          </div>
+          <!-- main -->
+          <div style="flex:1;background:#eef1f5;padding:0">
+            <div style="background:#fff;border-bottom:1px solid #dfe1e6;padding:20px 32px">
+              <div style="font-size:13px;color:#565c65;margin-bottom:10px">Good morning, Dana — here's your day. <span style="color:#565c65">Monday, July 21</span></div>
+              <div style="display:flex;align-items:center;gap:12px;border:2px solid #005ea2;border-radius:8px;padding:12px 18px;background:#fff;box-shadow:0 1px 4px rgba(0,94,162,.12)">
+                <span class="material-symbols-outlined" style="font-size:24px;color:#005ea2">search</span>
+                <span style="flex:1;font-size:16px;color:#565c65">Search a constituent, application #, or license — or type a command…</span>
+                <span style="font-size:11px;color:#565c65;border:1px solid #c9ccd0;border-radius:4px;padding:2px 7px;font-weight:600">⌘K</span>
+              </div>
+            </div>
+            <div style="padding:24px 32px;display:grid;grid-template-columns:1.6fr 1fr;gap:22px;align-items:start">
+              <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid #dfe1e6"><div style="font-size:16px;font-weight:700;color:#1b1b1b">My day <span style="color:#565c65;font-weight:400;font-size:13px">· 12 tasks, 3 overdue</span></div><a href="#2a" style="font-size:13px">Open queue</a></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid #eceef1"><span style="width:8px;height:8px;border-radius:50%;background:#b50909;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Marlowe, Jean — Waterfowl Permit renewal</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">Received Jul 17 · SLA breached 1 day ago</div></div><span style="background:#fce4e4;color:#8b1a1a;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Overdue</span></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid #eceef1"><span style="width:8px;height:8px;border-radius:50%;background:#e6a817;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Boring Company 155 — Commercial Fishing</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">New application · needs document review</div></div><span style="background:#fef2e4;color:#8a5200;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Review</span></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid #eceef1"><span style="width:8px;height:8px;border-radius:50%;background:#e6a817;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Rivera Outfitters LLC — Commercial Guide</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">Amendment · awaiting supervisor sign-off</div></div><span style="background:#fef2e4;color:#8a5200;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Review</span></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px"><span style="width:8px;height:8px;border-radius:50%;background:#2e6b1f;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Okafor, Samuel — Guide License</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">Approved · ready to issue</div></div><span style="background:#e7f4e4;color:#2e6b1f;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Issue</span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="background:#162e51;border-radius:8px;padding:20px 22px;color:#fff"><div style="font-size:12px;color:#a9c7e8;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Processed this week</div><div style="font-size:34px;font-weight:700;margin-top:4px">137</div><div style="display:flex;align-items:end;gap:4px;height:34px;margin-top:10px">
+                  <div style="flex:1;height:40%;background:#3f5f8f;border-radius:2px"></div><div style="flex:1;height:60%;background:#3f5f8f;border-radius:2px"></div><div style="flex:1;height:45%;background:#3f5f8f;border-radius:2px"></div><div style="flex:1;height:75%;background:#5b7cb0;border-radius:2px"></div><div style="flex:1;height:65%;background:#5b7cb0;border-radius:2px"></div><div style="flex:1;height:90%;background:#a9c7e8;border-radius:2px"></div><div style="flex:1;height:100%;background:#a9c7e8;border-radius:2px"></div>
+                </div></div>
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="font-size:12px;color:#565c65;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Avg. handling time</div><div style="font-size:28px;font-weight:700;color:#162e51;margin-top:4px">2.4 <span style="font-size:14px;color:#565c65;font-weight:500">days</span></div><div style="height:6px;border-radius:3px;background:#e6e9ec;margin-top:10px;overflow:hidden"><div style="width:80%;height:100%;background:#2e6b1f"></div></div><div style="font-size:12px;color:#565c65;margin-top:5px">80% of 3-day goal</div></div>
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="font-size:12px;color:#565c65;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Revenue (MTD)</div><div style="font-size:28px;font-weight:700;color:#162e51;margin-top:4px">$84.2k</div><a href="#2a" style="font-size:12.5px;display:inline-block;margin-top:4px">Open metrics dashboard →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="dv-next">Try next: "make the two-action tiles look more like buttons" · "add a Create Account tile with its own two actions" · "build out the My Tasks page" · "new directions"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Agency 3.0 homepage — three shell directions</span></div>
+  <p class="dv-intro">All three carry the constituent&nbsp;3.0 visual language (Public Sans, USWDS navy #162e51 + blue #005ea2, generous rules and hairlines) into the agency console. Same three priorities everywhere — constituent search, work queues / my tasks, and metrics — arranged differently. <a class="dv-oid" href="#1a">1a</a> keeps the sidebar shell from the constituent app; <a class="dv-oid" href="#1b">1b</a> restyles the top-nav tab bar into a dense dashboard; <a class="dv-oid" href="#1c">1c</a> is a work-first command layout with search front and center. 1280&nbsp;px desktop, not responsive.</p>
+  <div class="dv-opts">
+
+    <!-- ============ OPTION 1a — SIDEBAR SHELL ============ -->
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a><span><b>Sidebar shell</b> — matches the constituent 3.0 chrome; grouped left nav, utilitarian greeting strip with live counts</span></div>
+      <div class="dv-card" style="width:1280px">
+        <!-- top bar -->
+        <div style="height:56px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#fff">
+          <div style="display:flex;align-items:center;gap:14px">
+            <img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block">
+            <span style="font-size:16px;font-weight:600;letter-spacing:.2px">Name of Tenant</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;font-size:13.5px">
+            <a href="#1a" style="color:#dbe4f0;text-decoration:none">State Portal</a>
+            <span style="color:#3d557d">|</span>
+            <a href="#1a" style="color:#dbe4f0;text-decoration:none">Account</a>
+            <span style="color:#3d557d">|</span>
+            <a href="#1a" style="color:#dbe4f0;text-decoration:none">Logout</a>
+          </div>
+        </div>
+        <div style="display:flex;min-height:660px">
+          <!-- sidebar -->
+          <div style="width:264px;flex:none;border-right:1px solid #dfe1e6;background:#fff;padding:20px 0">
+            <div style="padding:0 20px 16px;border-bottom:1px solid #eceef1">
+              <div style="font-size:14px;font-weight:700;color:#1b1b1b">Dana Whitfield</div>
+              <div style="font-size:12.5px;color:#565c65;margin-top:2px">Licensing Specialist</div>
+              <div style="font-size:11px;font-weight:600;color:#162e51;letter-spacing:.4px;margin-top:8px;text-transform:uppercase">Switch Agency</div>
+              <div style="margin-top:6px;display:flex;align-items:center;justify-content:space-between;border:1px solid #a9aeb1;border-radius:4px;padding:7px 10px;font-size:12.5px;color:#1b1b1b">Dept. of Natural Resources <span class="material-symbols-outlined" style="font-size:18px;color:#565c65">expand_more</span></div>
+            </div>
+            <!-- nav groups -->
+            <div style="padding:14px 12px 0">
+              <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:4px;background:#eef4fb;border-left:3px solid #005ea2;font-size:14px;font-weight:600;color:#162e51"><span class="material-symbols-outlined" style="font-size:20px;color:#005ea2">home</span>Home</div>
+            </div>
+            <div style="padding:16px 22px 6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">WORKSPACE</div>
+            <div style="padding:0 12px;display:flex;flex-direction:column;gap:1px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">assignment</span>My Tasks</span><span style="background:#005ea2;color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">12</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span style="display:flex;align-items:center;gap:12px"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">inbox</span>Queues</span><span style="background:#e6e9ec;color:#3d4551;font-size:11px;font-weight:700;border-radius:10px;padding:1px 8px">48</span></div>
+            </div>
+            <div style="padding:16px 22px 6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CONSTITUENTS</div>
+            <div style="padding:0 12px;display:flex;flex-direction:column;gap:1px">
+              <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">search</span>Search Constituents</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">person_add</span>Create Account</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">send</span>Submit Application</div>
+            </div>
+            <div style="padding:16px 22px 6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#565c65">CATALOG &amp; INSIGHTS</div>
+            <div style="padding:0 12px;display:flex;flex-direction:column;gap:1px">
+              <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">badge</span>License Types</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">description</span>Applications</div>
+              <div style="display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:4px;font-size:14px;color:#1b1b1b"><span class="material-symbols-outlined" style="font-size:20px;color:#565c65">bar_chart</span>Metrics</div>
+            </div>
+          </div>
+          <!-- main -->
+          <div style="flex:1;background:#f7f9fb;padding:0">
+            <!-- utilitarian greeting strip -->
+            <div style="background:#fff;border-bottom:1px solid #dfe1e6;padding:22px 32px;display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <div style="font-size:22px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div>
+                <div style="font-size:13px;color:#565c65;margin-top:3px">Monday, July 21 · Dept. of Natural Resources</div>
+              </div>
+              <div style="display:flex;gap:0;border:1px solid #dfe1e6;border-radius:6px;overflow:hidden;background:#fff">
+                <div style="padding:10px 22px;text-align:center;border-right:1px solid #eceef1"><div style="font-size:22px;font-weight:700;color:#162e51">12</div><div style="font-size:11px;color:#565c65;text-transform:uppercase;letter-spacing:.4px">Assigned</div></div>
+                <div style="padding:10px 22px;text-align:center;border-right:1px solid #eceef1"><div style="font-size:22px;font-weight:700;color:#162e51">48</div><div style="font-size:11px;color:#565c65;text-transform:uppercase;letter-spacing:.4px">In queue</div></div>
+                <div style="padding:10px 22px;text-align:center"><div style="font-size:22px;font-weight:700;color:#b50909">3</div><div style="font-size:11px;color:#565c65;text-transform:uppercase;letter-spacing:.4px">Overdue</div></div>
+              </div>
+            </div>
+            <div style="padding:26px 32px;display:flex;flex-direction:column;gap:22px">
+              <!-- constituent search -->
+              <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:20px 22px">
+                <div style="font-size:15px;font-weight:700;color:#1b1b1b;margin-bottom:12px">Find a constituent</div>
+                <div style="display:flex;gap:10px">
+                  <div style="flex:1;display:flex;align-items:center;gap:10px;border:1px solid #565c65;border-radius:4px;padding:10px 14px;color:#565c65;font-size:14px"><span class="material-symbols-outlined" style="font-size:20px">search</span>Name, license #, DOB, or email…</div>
+                  <div style="background:#005ea2;color:#fff;border-radius:4px;padding:10px 24px;font-size:14px;font-weight:700;display:flex;align-items:center">Search</div>
+                </div>
+              </div>
+              <!-- work queue table -->
+              <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid #dfe1e6"><div style="font-size:15px;font-weight:700;color:#1b1b1b">My tasks</div><a href="#1a" style="font-size:13px">View all queues</a></div>
+                <div>
+                  <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr .9fr .7fr;gap:12px;padding:10px 22px;background:#f0f0f0;font-size:11px;font-weight:700;letter-spacing:.4px;color:#3d4551;text-transform:uppercase">
+                    <div>Constituent</div><div>Application</div><div>Type</div><div>Received</div><div>Status</div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr .9fr .7fr;gap:12px;padding:14px 22px;border-bottom:1px solid #eceef1;font-size:13.5px;color:#1b1b1b;align-items:center">
+                    <div style="font-weight:600">Boring Company 155</div><div>Commercial Fishing</div><div>New</div><div>Jul 18</div><div><span style="background:#fef2e4;color:#8a5200;font-size:11px;font-weight:700;padding:3px 9px;border-radius:11px">Review</span></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr .9fr .7fr;gap:12px;padding:14px 22px;border-bottom:1px solid #eceef1;font-size:13.5px;color:#1b1b1b;align-items:center">
+                    <div style="font-weight:600">Marlowe, Jean</div><div>Waterfowl Permit</div><div>Renewal</div><div>Jul 17</div><div><span style="background:#fce4e4;color:#8b1a1a;font-size:11px;font-weight:700;padding:3px 9px;border-radius:11px">Overdue</span></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr .9fr .7fr;gap:12px;padding:14px 22px;border-bottom:1px solid #eceef1;font-size:13.5px;color:#1b1b1b;align-items:center">
+                    <div style="font-weight:600">Okafor, Samuel</div><div>Guide License</div><div>New</div><div>Jul 16</div><div><span style="background:#e7f4e4;color:#2e6b1f;font-size:11px;font-weight:700;padding:3px 9px;border-radius:11px">Approved</span></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr .9fr .7fr;gap:12px;padding:14px 22px;font-size:13.5px;color:#1b1b1b;align-items:center">
+                    <div style="font-weight:600">Rivera Outfitters LLC</div><div>Commercial Guide</div><div>Amendment</div><div>Jul 15</div><div><span style="background:#fef2e4;color:#8a5200;font-size:11px;font-weight:700;padding:3px 9px;border-radius:11px">Review</span></div>
+                  </div>
+                </div>
+              </div>
+              <!-- metrics row -->
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:18px 20px"><div style="font-size:12px;color:#565c65;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Processed this week</div><div style="font-size:30px;font-weight:700;color:#162e51;margin-top:6px">137</div><div style="font-size:12.5px;color:#2e6b1f;margin-top:2px">▲ 8% vs last week</div></div>
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:18px 20px"><div style="font-size:12px;color:#565c65;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Avg. handling time</div><div style="font-size:30px;font-weight:700;color:#162e51;margin-top:6px">2.4<span style="font-size:15px;font-weight:500;color:#565c65"> days</span></div><div style="font-size:12.5px;color:#565c65;margin-top:2px">Goal: under 3 days</div></div>
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:18px 20px"><div style="font-size:12px;color:#565c65;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Revenue collected (MTD)</div><div style="font-size:30px;font-weight:700;color:#162e51;margin-top:6px">$84.2k</div><a href="#1a" style="font-size:12.5px;display:inline-block;margin-top:2px">Open metrics →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ OPTION 1b — TOP-NAV DASHBOARD ============ -->
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a><span><b>Restyled top-nav dashboard</b> — familiar tab bar from today's app, modernized; KPI band + two-column work / insights</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:52px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><span>Welcome, Dana</span><span style="color:#3d557d">|</span><a href="#1b" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#1b" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <!-- tab bar -->
+        <div style="background:#1b3763;display:flex;align-items:stretch;padding:0 28px;color:#cdd9ea;font-size:14px;font-weight:600">
+          <div style="padding:13px 18px;color:#fff;border-bottom:3px solid #fff;background:rgba(255,255,255,.06)">Home</div>
+          <div style="padding:13px 18px">My Tasks</div>
+          <div style="padding:13px 18px">Queues</div>
+          <div style="padding:13px 18px">Constituents</div>
+          <div style="padding:13px 18px">License Types</div>
+          <div style="padding:13px 18px">Applications</div>
+          <div style="padding:13px 18px">Metrics</div>
+          <div style="padding:13px 18px">Settings</div>
+        </div>
+        <div style="background:#f7f9fb;padding:24px 28px 30px;min-height:600px">
+          <!-- greeting + search inline -->
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px">
+            <div><div style="font-size:21px;font-weight:700;color:#1b1b1b">Good morning, Dana.</div><div style="font-size:13px;color:#565c65;margin-top:2px">Monday, July 21 · Dept. of Natural Resources</div></div>
+            <div style="display:flex;gap:8px"><div style="width:320px;display:flex;align-items:center;gap:8px;border:1px solid #565c65;border-radius:4px;padding:9px 12px;background:#fff;color:#565c65;font-size:13.5px"><span class="material-symbols-outlined" style="font-size:19px">search</span>Search constituents…</div><div style="background:#005ea2;color:#fff;border-radius:4px;padding:9px 20px;font-size:13.5px;font-weight:700;display:flex;align-items:center">Search</div></div>
+          </div>
+          <!-- KPI band -->
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px">
+            <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:16px 18px;border-top:3px solid #005ea2"><div style="font-size:12px;color:#565c65;font-weight:600;text-transform:uppercase;letter-spacing:.3px">My tasks</div><div style="font-size:28px;font-weight:700;color:#162e51;margin-top:4px">12</div></div>
+            <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:16px 18px;border-top:3px solid #565c65"><div style="font-size:12px;color:#565c65;font-weight:600;text-transform:uppercase;letter-spacing:.3px">In queue</div><div style="font-size:28px;font-weight:700;color:#162e51;margin-top:4px">48</div></div>
+            <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:16px 18px;border-top:3px solid #b50909"><div style="font-size:12px;color:#565c65;font-weight:600;text-transform:uppercase;letter-spacing:.3px">Overdue</div><div style="font-size:28px;font-weight:700;color:#b50909;margin-top:4px">3</div></div>
+            <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:16px 18px;border-top:3px solid #2e6b1f"><div style="font-size:12px;color:#565c65;font-weight:600;text-transform:uppercase;letter-spacing:.3px">Processed today</div><div style="font-size:28px;font-weight:700;color:#162e51;margin-top:4px">26</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.7fr 1fr;gap:20px">
+            <!-- work queue -->
+            <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;overflow:hidden">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;border-bottom:1px solid #dfe1e6"><div style="font-size:15px;font-weight:700;color:#1b1b1b">My tasks</div><a href="#1b" style="font-size:13px">View all</a></div>
+              <div style="display:grid;grid-template-columns:1.5fr 1.3fr .8fr .8fr;gap:10px;padding:9px 20px;background:#f0f0f0;font-size:11px;font-weight:700;letter-spacing:.3px;color:#3d4551;text-transform:uppercase"><div>Constituent</div><div>Application</div><div>Received</div><div>Status</div></div>
+              <div style="display:grid;grid-template-columns:1.5fr 1.3fr .8fr .8fr;gap:10px;padding:13px 20px;border-bottom:1px solid #eceef1;font-size:13px;color:#1b1b1b;align-items:center"><div style="font-weight:600">Boring Company 155</div><div>Commercial Fishing</div><div>Jul 18</div><div><span style="background:#fef2e4;color:#8a5200;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:10px">Review</span></div></div>
+              <div style="display:grid;grid-template-columns:1.5fr 1.3fr .8fr .8fr;gap:10px;padding:13px 20px;border-bottom:1px solid #eceef1;font-size:13px;color:#1b1b1b;align-items:center"><div style="font-weight:600">Marlowe, Jean</div><div>Waterfowl Permit</div><div>Jul 17</div><div><span style="background:#fce4e4;color:#8b1a1a;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:10px">Overdue</span></div></div>
+              <div style="display:grid;grid-template-columns:1.5fr 1.3fr .8fr .8fr;gap:10px;padding:13px 20px;border-bottom:1px solid #eceef1;font-size:13px;color:#1b1b1b;align-items:center"><div style="font-weight:600">Okafor, Samuel</div><div>Guide License</div><div>Jul 16</div><div><span style="background:#e7f4e4;color:#2e6b1f;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:10px">Approved</span></div></div>
+              <div style="display:grid;grid-template-columns:1.5fr 1.3fr .8fr .8fr;gap:10px;padding:13px 20px;font-size:13px;color:#1b1b1b;align-items:center"><div style="font-weight:600">Rivera Outfitters</div><div>Commercial Guide</div><div>Jul 15</div><div><span style="background:#fef2e4;color:#8a5200;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:10px">Review</span></div></div>
+            </div>
+            <!-- right rail -->
+            <div style="display:flex;flex-direction:column;gap:20px">
+              <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:18px 20px">
+                <div style="font-size:15px;font-weight:700;color:#1b1b1b;margin-bottom:14px">Quick actions</div>
+                <div style="display:flex;flex-direction:column;gap:2px">
+                  <a href="#1b" style="display:flex;align-items:center;gap:10px;padding:9px 0;font-size:14px;text-decoration:none;color:#005ea2;border-bottom:1px solid #eceef1"><span class="material-symbols-outlined" style="font-size:19px">person_add</span>Create constituent account</a>
+                  <a href="#1b" style="display:flex;align-items:center;gap:10px;padding:9px 0;font-size:14px;text-decoration:none;color:#005ea2;border-bottom:1px solid #eceef1"><span class="material-symbols-outlined" style="font-size:19px">send</span>Submit application</a>
+                  <a href="#1b" style="display:flex;align-items:center;gap:10px;padding:9px 0;font-size:14px;text-decoration:none;color:#005ea2;border-bottom:1px solid #eceef1"><span class="material-symbols-outlined" style="font-size:19px">badge</span>Create license type</a>
+                  <a href="#1b" style="display:flex;align-items:center;gap:10px;padding:9px 0;font-size:14px;text-decoration:none;color:#005ea2"><span class="material-symbols-outlined" style="font-size:19px">bar_chart</span>View all metrics</a>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:18px 20px">
+                <div style="font-size:15px;font-weight:700;color:#1b1b1b;margin-bottom:12px">This week</div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eceef1;font-size:13.5px"><span style="color:#565c65">Processed</span><span style="font-weight:700;color:#162e51">137</span></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eceef1;font-size:13.5px"><span style="color:#565c65">Avg. handling time</span><span style="font-weight:700;color:#162e51">2.4 days</span></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;font-size:13.5px"><span style="color:#565c65">Revenue (MTD)</span><span style="font-weight:700;color:#162e51">$84.2k</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ OPTION 1c — WORK-FIRST COMMAND ============ -->
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a><span><b>Work-first command layout</b> — icon rail + a prominent search command bar; "My day" task focus with metric sparkline tiles</span></div>
+      <div class="dv-card" style="width:1280px">
+        <div style="height:56px;background:#162e51;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px"><img src="tyler-t.png" alt="Tenant logo" style="width:26px;height:26px;display:block"><span style="font-size:15px;font-weight:600">Name of Tenant</span></div>
+          <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#dbe4f0"><a href="#1c" style="color:#dbe4f0;text-decoration:none">State Portal</a><span style="color:#3d557d">|</span><a href="#1c" style="color:#dbe4f0;text-decoration:none">Account</a><span style="color:#3d557d">|</span><a href="#1c" style="color:#dbe4f0;text-decoration:none">Logout</a></div>
+        </div>
+        <div style="display:flex;min-height:660px">
+          <!-- icon rail -->
+          <div style="width:76px;flex:none;background:#fff;border-right:1px solid #dfe1e6;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div style="width:56px;height:52px;border-radius:6px;background:#eef4fb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#005ea2"><span class="material-symbols-outlined" style="font-size:22px">home</span><span style="font-size:10px;font-weight:600">Home</span></div>
+            <div style="width:56px;height:52px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#565c65;position:relative"><span class="material-symbols-outlined" style="font-size:22px">assignment</span><span style="font-size:10px">Tasks</span><span style="position:absolute;top:6px;right:8px;background:#005ea2;color:#fff;font-size:9px;font-weight:700;border-radius:8px;padding:0 5px">12</span></div>
+            <div style="width:56px;height:52px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#565c65"><span class="material-symbols-outlined" style="font-size:22px">inbox</span><span style="font-size:10px">Queues</span></div>
+            <div style="width:56px;height:52px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#565c65"><span class="material-symbols-outlined" style="font-size:22px">groups</span><span style="font-size:10px">People</span></div>
+            <div style="width:56px;height:52px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#565c65"><span class="material-symbols-outlined" style="font-size:22px">badge</span><span style="font-size:10px">Licenses</span></div>
+            <div style="width:56px;height:52px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#565c65"><span class="material-symbols-outlined" style="font-size:22px">bar_chart</span><span style="font-size:10px">Metrics</span></div>
+          </div>
+          <!-- main -->
+          <div style="flex:1;background:#eef1f5;padding:0">
+            <!-- command bar -->
+            <div style="background:#fff;border-bottom:1px solid #dfe1e6;padding:20px 32px">
+              <div style="font-size:13px;color:#565c65;margin-bottom:10px">Good morning, Dana — here's your day. <span style="color:#565c65">Monday, July 21</span></div>
+              <div style="display:flex;align-items:center;gap:12px;border:2px solid #005ea2;border-radius:8px;padding:12px 18px;background:#fff;box-shadow:0 1px 4px rgba(0,94,162,.12)">
+                <span class="material-symbols-outlined" style="font-size:24px;color:#005ea2">search</span>
+                <span style="flex:1;font-size:16px;color:#565c65">Search a constituent, application #, or license — or type a command…</span>
+                <span style="font-size:11px;color:#565c65;border:1px solid #c9ccd0;border-radius:4px;padding:2px 7px;font-weight:600">⌘K</span>
+              </div>
+            </div>
+            <div style="padding:24px 32px;display:grid;grid-template-columns:1.6fr 1fr;gap:22px;align-items:start">
+              <!-- my day list -->
+              <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid #dfe1e6"><div style="font-size:16px;font-weight:700;color:#1b1b1b">My day <span style="color:#565c65;font-weight:400;font-size:13px">· 12 tasks, 3 overdue</span></div><a href="#1c" style="font-size:13px">Open queue</a></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid #eceef1"><span style="width:8px;height:8px;border-radius:50%;background:#b50909;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Marlowe, Jean — Waterfowl Permit renewal</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">Received Jul 17 · SLA breached 1 day ago</div></div><span style="background:#fce4e4;color:#8b1a1a;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Overdue</span></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid #eceef1"><span style="width:8px;height:8px;border-radius:50%;background:#e6a817;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Boring Company 155 — Commercial Fishing</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">New application · needs document review</div></div><span style="background:#fef2e4;color:#8a5200;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Review</span></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid #eceef1"><span style="width:8px;height:8px;border-radius:50%;background:#e6a817;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Rivera Outfitters LLC — Commercial Guide</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">Amendment · awaiting supervisor sign-off</div></div><span style="background:#fef2e4;color:#8a5200;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Review</span></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:15px 22px"><span style="width:8px;height:8px;border-radius:50%;background:#2e6b1f;flex:none"></span><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#1b1b1b">Okafor, Samuel — Guide License</div><div style="font-size:12.5px;color:#565c65;margin-top:2px">Approved · ready to issue</div></div><span style="background:#e7f4e4;color:#2e6b1f;font-size:11px;font-weight:700;padding:4px 10px;border-radius:11px">Issue</span></div>
+              </div>
+              <!-- metric tiles -->
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="background:#162e51;border-radius:8px;padding:20px 22px;color:#fff"><div style="font-size:12px;color:#a9c7e8;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Processed this week</div><div style="font-size:34px;font-weight:700;margin-top:4px">137</div><div style="display:flex;align-items:end;gap:4px;height:34px;margin-top:10px">
+                  <div style="flex:1;height:40%;background:#3f5f8f;border-radius:2px"></div><div style="flex:1;height:60%;background:#3f5f8f;border-radius:2px"></div><div style="flex:1;height:45%;background:#3f5f8f;border-radius:2px"></div><div style="flex:1;height:75%;background:#5b7cb0;border-radius:2px"></div><div style="flex:1;height:65%;background:#5b7cb0;border-radius:2px"></div><div style="flex:1;height:90%;background:#a9c7e8;border-radius:2px"></div><div style="flex:1;height:100%;background:#a9c7e8;border-radius:2px"></div>
+                </div></div>
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="font-size:12px;color:#565c65;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Avg. handling time</div><div style="font-size:28px;font-weight:700;color:#162e51;margin-top:4px">2.4 <span style="font-size:14px;color:#565c65;font-weight:500">days</span></div><div style="height:6px;border-radius:3px;background:#e6e9ec;margin-top:10px;overflow:hidden"><div style="width:80%;height:100%;background:#2e6b1f"></div></div><div style="font-size:12px;color:#565c65;margin-top:5px">80% of 3-day goal</div></div>
+                <div style="background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:18px 20px"><div style="font-size:12px;color:#565c65;text-transform:uppercase;letter-spacing:.4px;font-weight:600">Revenue (MTD)</div><div style="font-size:28px;font-weight:700;color:#162e51;margin-top:4px">$84.2k</div><a href="#1c" style="font-size:12.5px;display:inline-block;margin-top:4px">Open metrics dashboard →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "build out <a class="dv-oid" href="#1a">1a</a> — show My Tasks and the constituent search results" · "combine <a class="dv-oid" href="#1c">1c</a>'s command bar with <a class="dv-oid" href="#1a">1a</a>'s sidebar" · "add a Metrics page" · "new directions"</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  navRef = React.createRef();
+  navRef8 = React.createRef();
+  navRef9 = React.createRef();
+  state = {
+    items: ['home','tasks','queues','constituents','licenses','applications','metrics','casemgmt','flags','inspections','denials','appeals','settings'],
+    active: 'home',
+    editing: false,
+    addOpen: false,
+    dragKey: null,
+    canLeft: false,
+    canRight: false,
+    canLeft8: false,
+    canRight8: false,
+    canLeft9: false,
+    canRight9: false,
+  };
+
+  componentDidMount() { this._ov = () => this.updateOverflow(); window.addEventListener('resize', this._ov); setTimeout(this._ov, 80); }
+  componentWillUnmount() { window.removeEventListener('resize', this._ov); }
+  componentDidUpdate(_p, prev) { if (prev.items !== this.state.items || prev.editing !== this.state.editing) setTimeout(() => this.updateOverflow(), 80); }
+  updateOverflow() {
+    this._measure(this.navRef.current, 'canLeft', 'canRight');
+    this._measure(this.navRef8.current, 'canLeft8', 'canRight8');
+    this._measure(this.navRef9.current, 'canLeft9', 'canRight9');
+  }
+  _measure(el, lKey, rKey) {
+    if (!el) return;
+    const canLeft = el.scrollLeft > 2;
+    const canRight = el.scrollLeft < (el.scrollWidth - el.clientWidth - 2);
+    if (canLeft !== this.state[lKey] || canRight !== this.state[rKey]) this.setState({[lKey]:canLeft, [rKey]:canRight});
+  }
+  scrollDir(dir, ref) {
+    const el = (ref || this.navRef).current; if (!el) return;
+    const kids = Array.from(el.children);
+    const vpr = el.getBoundingClientRect();
+    let dest;
+    if (dir > 0) {
+      const t = kids.find(k => (k.getBoundingClientRect().right - vpr.right) > 1);
+      dest = t ? el.scrollLeft + (t.getBoundingClientRect().right - vpr.right) : el.scrollWidth - el.clientWidth;
+    } else {
+      const before = kids.filter(k => (k.getBoundingClientRect().left - vpr.left) < -1);
+      const t = before[before.length - 1];
+      dest = t ? el.scrollLeft + (t.getBoundingClientRect().left - vpr.left) : 0;
+    }
+    el.scrollLeft = Math.max(0, Math.min(dest, el.scrollWidth - el.clientWidth));
+    this.updateOverflow();
+    setTimeout(() => this.updateOverflow(), 0);
+  }
+
+  catalog() {
+    return {
+      home:          {label:'Home',            icon:'home',        fa:'fa-solid fa-house'},
+      tasks:         {label:'My Tasks',         icon:'assignment', badge:'12', fa:'fa-solid fa-list-check'},
+      queues:        {label:'Queues',           icon:'inbox',       badge:'48', fa:'fa-solid fa-inbox'},
+      constituents:  {label:'Constituents',     icon:'groups',      fa:'fa-solid fa-users'},
+      licenses:      {label:'License Types',    icon:'badge',       fa:'fa-solid fa-id-badge'},
+      applications:  {label:'Applications',     icon:'description', fa:'fa-solid fa-file-lines'},
+      metrics:       {label:'Metrics',          icon:'bar_chart',   fa:'fa-solid fa-chart-column'},
+      casemgmt:      {label:'Case Management',  icon:'folder_open', fa:'fa-solid fa-folder-open'},
+      flags:         {label:'Flags',            icon:'flag',        fa:'fa-solid fa-flag'},
+      inspections:   {label:'Inspections',      icon:'fact_check',  fa:'fa-solid fa-clipboard-check'},
+      denials:       {label:'Denials',          icon:'block',       fa:'fa-solid fa-ban'},
+      appeals:       {label:'Appeals',          icon:'gavel',       fa:'fa-solid fa-gavel'},
+      correspondence:{label:'Correspondence',   icon:'mail',        fa:'fa-solid fa-envelope'},
+      settings:      {label:'Settings',         icon:'settings',    fa:'fa-solid fa-gear'},
+    };
+  }
+
+  addItem(key)    { this.setState(s => ({items:[...s.items, key], addOpen:false})); }
+  removeItem(key) { this.setState(s => ({items:s.items.filter(k=>k!==key), active: s.active===key ? (s.items.filter(k=>k!==key)[0]||null) : s.active})); }
+  dropOn(target)  {
+    const {dragKey, items} = this.state;
+    if (!dragKey || dragKey===target) { this.setState({dragKey:null}); return; }
+    const arr = items.filter(k=>k!==dragKey);
+    const to = arr.indexOf(target);
+    arr.splice(to, 0, dragKey);
+    this.setState({items:arr, dragKey:null});
+  }
+
+  pillStyle(active) {
+    if (this.state.editing) {
+      return 'display:flex;align-items:center;gap:6px;padding:0 12px;height:34px;margin:7px 3px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:grab;position:relative;background:rgba(255,255,255,.10);border:1px dashed rgba(255,255,255,.4);color:#eaf0f8;user-select:none;flex:0 0 auto;white-space:nowrap';
+    }
+    return 'display:flex;align-items:center;gap:7px;padding:0 15px;height:48px;font-size:14px;font-weight:600;cursor:pointer;position:relative;user-select:none;flex:0 0 auto;white-space:nowrap;border-bottom:3px solid ' + (active?'#e6a817':'transparent') + ';background:' + (active?'rgba(255,255,255,.07)':'transparent') + ';color:' + (active?'#fff':'#cdd9ea');
+  }
+
+  renderVals() {
+    const C = this.catalog();
+    const navItems = this.state.items.map(key => {
+      const c = C[key] || {label:key, icon:'link'};
+      return {
+        key, label:c.label, icon:c.icon, faIcon:c.fa,
+        badge: c.badge || '', hasBadge: !!c.badge && !this.state.editing,
+        editing: this.state.editing,
+        draggable: this.state.editing,
+        pillStyle: this.pillStyle(key===this.state.active),
+        onClick: () => { if(!this.state.editing) this.setState({active:key}); },
+        onRemove: (e) => { if(e&&e.stopPropagation) e.stopPropagation(); this.removeItem(key); },
+        onDragStart: () => this.setState({dragKey:key}),
+        onDragOver: (e) => { if(e&&e.preventDefault) e.preventDefault(); },
+        onDrop: (e) => { if(e&&e.preventDefault) e.preventDefault(); this.dropOn(key); },
+      };
+    });
+    const available = Object.keys(C).filter(k => !this.state.items.includes(k)).map(k => ({
+      key:k, label:C[k].label, icon:C[k].icon, faIcon:C[k].fa, onAdd: () => this.addItem(k),
+    }));
+    return {
+      navItems, available,
+      hasAvailable: available.length > 0,
+      editing: this.state.editing,
+      addOpen: this.state.addOpen,
+      toggleEdit: () => this.setState(s => ({editing:!s.editing, addOpen:false})),
+      toggleAdd:  () => this.setState(s => ({addOpen:!s.addOpen})),
+      navRef: this.navRef,
+      canLeft: this.state.canLeft,
+      canRight: this.state.canRight,
+      scrollLeft: () => this.scrollDir(-1, this.navRef),
+      scrollRight: () => this.scrollDir(1, this.navRef),
+      navRef8: this.navRef8,
+      canLeft8: this.state.canLeft8,
+      canRight8: this.state.canRight8,
+      scrollLeft8: () => this.scrollDir(-1, this.navRef8),
+      scrollRight8: () => this.scrollDir(1, this.navRef8),
+      navRef9: this.navRef9,
+      canLeft9: this.state.canLeft9,
+      canRight9: this.state.canRight9,
+      scrollLeft9: () => this.scrollDir(-1, this.navRef9),
+      scrollRight9: () => this.scrollDir(1, this.navRef9),
+      onNavScroll: () => this.updateOverflow(),
+      editLabel:  this.state.editing ? 'Done' : 'Customize',
+      customizeIcon: this.state.editing ? 'check' : 'tune',
+      faCustomizeIcon: this.state.editing ? 'fa-solid fa-check' : 'fa-solid fa-sliders',
+      customizeStyle: 'display:flex;align-items:center;gap:6px;padding:0 14px;height:34px;margin:7px 0;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;flex:0 0 auto;' + (this.state.editing ? 'background:#e6a817;color:#3d2a00;border:1px solid #e6a817' : 'background:transparent;color:#cdd9ea;border:1px solid #3d557d'),
+    };
+  }
+}
+</script>
+</body>
+</html>
