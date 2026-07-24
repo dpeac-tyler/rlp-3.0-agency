@@ -14,7 +14,7 @@
   --c-gold-icon: #a97400;
   --c-blue: #005ea2;
   --c-blue-hover: #1a4480;
-  --c-page-bg: #f0eee9;
+  --c-page-bg: #fff;
   --c-surface: #ffffff;
   --c-tile-bg: #fafafa;
   --c-border: #dfe1e6;
@@ -539,21 +539,22 @@ button {
 }
 
 .tile__icon {
-  font-size: 28px;
+  font-size: 26px;
   color: var(--c-gold-icon);
-  width: 32px;
+  width: 30px;
   text-align: center;
+  line-height: 1;
 }
 
 .tile__title {
   font-size: 24px;
   font-weight: 700;
   color: var(--c-header-navy);
-  margin-bottom: 10px;
+  line-height: 1.2;
 }
 
 .tile--settings .tile__title {
-  margin-bottom: 0;
+  margin-bottom: 8px;
 }
 
 .tile__body {
