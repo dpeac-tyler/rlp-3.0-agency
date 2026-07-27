@@ -259,6 +259,65 @@ button {
   color: #a9c7e8;
 }
 
+.toolbar-divider {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 36px;
+  margin: 8px 4px 8px 14px;
+  background: rgba(255, 255, 255, .25);
+}
+
+.toolbar-search-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  height: 38px;
+  margin: 7px 3px;
+  border-radius: var(--r-pill);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--c-toolbar-idle);
+  flex: 0 0 auto;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.toolbar-search-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.toolbar-search-toggle__switch {
+  position: relative;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .25);
+  transition: background .15s ease;
+}
+
+.toolbar-search-toggle__switch.is-on {
+  background: var(--c-gold);
+}
+
+.toolbar-search-toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left .15s ease;
+}
+
+.toolbar-search-toggle__switch.is-on .toolbar-search-toggle__knob {
+  left: 18px;
+}
+
 .toolbar-customize-btn {
   display: flex;
   align-items: center;

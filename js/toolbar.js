@@ -55,6 +55,7 @@
     this.state = {
       items: (saved && saved.items) || DEFAULT_ORDER.slice(),
       active: opts.activeKey !== undefined ? opts.activeKey : (saved ? saved.active : null),
+      searchPanelVisible: (saved && typeof saved.searchPanelVisible === 'boolean') ? saved.searchPanelVisible : true,
       editing: false,
       addOpen: false,
       dragKey: null,
@@ -69,6 +70,7 @@
     document.addEventListener('click', this._boundOutsideClick);
 
     this.render();
+    this._applySearchPanelVisibility();
     var self = this;
     setTimeout(function () { self.updateOverflow(); }, 80);
   }
@@ -80,8 +82,17 @@
 
   Toolbar.prototype._persist = function () {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ items: this.state.items, active: this.state.active }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        items: this.state.items,
+        active: this.state.active,
+        searchPanelVisible: this.state.searchPanelVisible,
+      }));
     } catch (e) { /* storage unavailable — ignore */ }
+  };
+
+  Toolbar.prototype._applySearchPanelVisibility = function () {
+    var panel = document.querySelector('.search-panel');
+    if (panel) panel.style.display = this.state.searchPanelVisible ? '' : 'none';
   };
 
   Toolbar.prototype._onOutsideClick = function (e) {
@@ -111,6 +122,11 @@
 
   Toolbar.prototype.toggleAdd = function () {
     this.setState({ addOpen: !this.state.addOpen });
+  };
+
+  Toolbar.prototype.toggleSearchPanel = function () {
+    this.setState({ searchPanelVisible: !this.state.searchPanelVisible });
+    this._applySearchPanelVisibility();
   };
 
   Toolbar.prototype.select = function (key) {
@@ -221,6 +237,14 @@
     if (state.editing) {
       html += '<button type="button" class="toolbar-add-btn" data-action="add">' +
         '<i class="fa-solid fa-plus" aria-hidden="true"></i>Add</button>';
+
+      html += '<span class="toolbar-divider" aria-hidden="true"></span>';
+
+      html += '<div class="toolbar-search-toggle" data-action="search-toggle" role="switch" ' +
+        'aria-checked="' + state.searchPanelVisible + '" aria-label="Search Panel" tabindex="0">' +
+        '<span class="toolbar-search-toggle__label">Search Panel</span>' +
+        '<span class="toolbar-search-toggle__switch' + (state.searchPanelVisible ? ' is-on' : '') + '">' +
+        '<span class="toolbar-search-toggle__knob"></span></span></div>';
     }
 
     html += '<button type="button" class="toolbar-customize-btn' + (state.editing ? ' is-active' : '') + '" data-action="customize">' +
@@ -269,6 +293,14 @@
 
     var customizeBtn = root.querySelector('[data-action="customize"]');
     if (customizeBtn) customizeBtn.addEventListener('click', function () { self.toggleEdit(); });
+
+    var searchToggle = root.querySelector('[data-action="search-toggle"]');
+    if (searchToggle) {
+      searchToggle.addEventListener('click', function () { self.toggleSearchPanel(); });
+      searchToggle.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); self.toggleSearchPanel(); }
+      });
+    }
 
     Array.prototype.forEach.call(root.querySelectorAll('.toolbar-add-menu__row'), function (rowEl) {
       rowEl.addEventListener('click', function () { self.addItem(rowEl.getAttribute('data-add')); });
