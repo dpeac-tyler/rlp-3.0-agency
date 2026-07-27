@@ -374,6 +374,7 @@
 </div>
 
 <script src="js/toolbar.js"></script>
+<script src="js/column-select.js"></script>
 <script>
   initToolbar('#toolbar', { activeKey: 'queues' });
 
@@ -459,75 +460,12 @@
   })();
 
   // Column visibility multiselect (Open table)
-  (function () {
-    var trigger = document.getElementById('column-select-button');
-    var panel = document.getElementById('column-select-panel');
-    var triggerText = trigger.querySelector('.multiselect-trigger-text');
-    var checkboxes = panel.querySelectorAll('.column-checkbox');
-    var table = document.getElementById('open-queue-table');
-    var filterInput = document.getElementById('column-filter-input');
-    var options = panel.querySelectorAll('.multiselect-option');
-
-    function updateTriggerText() {
-      var total = checkboxes.length;
-      var selected = Array.prototype.filter.call(checkboxes, function (cb) { return cb.checked; }).length;
-      if (selected === total) triggerText.textContent = 'All Columns';
-      else if (selected === 0) triggerText.textContent = 'No Columns';
-      else triggerText.textContent = selected + ' of ' + total + ' Columns';
-    }
-
-    function setColumnVisibility(columnIndex, isChecked) {
-      var headers = table.querySelectorAll('thead th');
-      if (headers[columnIndex]) headers[columnIndex].style.display = isChecked ? '' : 'none';
-
-      table.querySelectorAll('tbody tr').forEach(function (row) {
-        var cells = row.querySelectorAll('td');
-        if (cells[columnIndex]) cells[columnIndex].style.display = isChecked ? '' : 'none';
-      });
-    }
-
-    // Apply each checkbox's default checked state on load (e.g. Application Type starts off)
-    checkboxes.forEach(function (checkbox) {
-      setColumnVisibility(parseInt(checkbox.dataset.column, 10), checkbox.checked);
-    });
-    updateTriggerText();
-
-    trigger.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var expanded = trigger.getAttribute('aria-expanded') === 'true';
-      trigger.setAttribute('aria-expanded', String(!expanded));
-      panel.hidden = expanded;
-      if (!expanded) {
-        filterInput.value = '';
-        options.forEach(function (option) { option.style.display = ''; });
-        filterInput.focus();
-      }
-    });
-
-    panel.addEventListener('click', function (e) { e.stopPropagation(); });
-
-    document.addEventListener('click', function (e) {
-      if (!trigger.contains(e.target) && !panel.contains(e.target)) {
-        trigger.setAttribute('aria-expanded', 'false');
-        panel.hidden = true;
-      }
-    });
-
-    filterInput.addEventListener('input', function () {
-      var query = this.value.trim().toLowerCase();
-      options.forEach(function (option) {
-        var label = option.querySelector('span').textContent.toLowerCase();
-        option.style.display = label.indexOf(query) === -1 ? 'none' : '';
-      });
-    });
-
-    checkboxes.forEach(function (checkbox) {
-      checkbox.addEventListener('change', function () {
-        setColumnVisibility(parseInt(this.dataset.column, 10), this.checked);
-        updateTriggerText();
-      });
-    });
-  })();
+  initColumnSelect({
+    triggerId: 'column-select-button',
+    panelId: 'column-select-panel',
+    filterId: 'column-filter-input',
+    tableId: 'open-queue-table',
+  });
 
   // Select all / row selection (Open table)
   (function () {
