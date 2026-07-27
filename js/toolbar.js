@@ -17,7 +17,7 @@
   var CATALOG = {
     home:           { label: 'Home',            icon: 'fa-solid fa-house' },
     tasks:          { label: 'My Tasks',         icon: 'fa-solid fa-list-check', badge: '12' },
-    queues:         { label: 'Queues',           icon: 'fa-solid fa-inbox',      badge: '48' },
+    queues:         { label: 'Queues',           icon: 'fa-solid fa-inbox',      badge: '99+' },
     constituents:   { label: 'Constituents',     icon: 'fa-solid fa-users' },
     licenses:       { label: 'License Types',    icon: 'fa-solid fa-id-badge' },
     applications:   { label: 'Applications',     icon: 'fa-solid fa-file-lines' },
