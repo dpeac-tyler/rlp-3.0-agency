@@ -75,6 +75,16 @@
           </select>
         </div>
         <div class="field">
+          <label for="application-type">Application Type</label>
+          <select id="application-type" name="application-type">
+            <option value="">Please Select</option>
+            <option value="original-one">Original (One)</option>
+            <option value="original-many-overlapping">Original (Many Overlapping)</option>
+            <option value="renewal">Renewal</option>
+            <option value="maintenance-update">Maintenance/Update</option>
+          </select>
+        </div>
+        <div class="field">
           <label for="task-name">Task Name</label>
           <select id="task-name" name="task-name">
             <option value="">Please Select</option>
@@ -82,13 +92,13 @@
             <option value="child-support-check">Child Support Check</option>
           </select>
         </div>
+      </div>
+
+      <div class="field-grid">
         <div class="field">
           <label for="constituent-name">Constituent Name</label>
           <input type="text" id="constituent-name" name="constituent-name">
         </div>
-      </div>
-
-      <div class="field-grid">
         <div class="field">
           <label for="submitted-by">Submitted By</label>
           <input type="text" id="submitted-by" name="submitted-by">
@@ -97,7 +107,10 @@
           <label for="submitted-date">Submitted Date</label>
           <input type="date" id="submitted-date" name="submitted-date">
         </div>
-        <div class="field">
+      </div>
+
+      <div class="field-grid">
+        <div class="field field--full">
           <label for="user-group-button">User Group</label>
           <div class="multiselect">
             <button type="button" class="multiselect-trigger" id="user-group-button" aria-haspopup="listbox" aria-expanded="false">
@@ -139,12 +152,14 @@
               <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
             </button>
             <div class="multiselect-panel" id="column-select-panel" hidden>
+              <input type="text" class="multiselect-filter" id="column-filter-input" placeholder="Filter columns…" autocomplete="off">
               <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="1" checked><span>Application Title</span></label>
-              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="2" checked><span>Task Name</span></label>
-              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="3" checked><span>Constituent Name</span></label>
-              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="4" checked><span>Submitted By</span></label>
-              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="5" checked><span>Submitted Date</span></label>
-              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="6" checked><span>User Group</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="2"><span>Application Type</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="3" checked><span>Task Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="4" checked><span>Constituent Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="5" checked><span>Submitted By</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="6" checked><span>Submitted Date</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="7" checked><span>User Group</span></label>
             </div>
           </div>
           <label for="open-entries-per-page">Show</label>
@@ -162,6 +177,7 @@
           <tr>
             <th class="select-column"><input type="checkbox" id="select-all-open" aria-label="Select all rows"></th>
             <th>Application Title <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Application Type <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
             <th>Task Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
             <th>Constituent Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
             <th>Submitted By <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
@@ -174,6 +190,7 @@
           <tr>
             <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Business Application 123</td>
+            <td>Original (One)</td>
             <td>Task 1 of 1</td>
             <td>John Smith</td>
             <td>Alan Jones</td>
@@ -187,6 +204,7 @@
           <tr>
             <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Professional Engineer Application</td>
+            <td>Renewal</td>
             <td>Task 1 of 2</td>
             <td>Maria Garcia</td>
             <td>Sarah Johnson</td>
@@ -200,6 +218,7 @@
           <tr>
             <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Contractor License Renewal</td>
+            <td>Renewal</td>
             <td>Task 1 of 1</td>
             <td>Robert Williams</td>
             <td>Michael Chen</td>
@@ -213,6 +232,7 @@
           <tr>
             <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Business Application 456</td>
+            <td>Original (Many Overlapping)</td>
             <td>Task 2 of 2</td>
             <td>Jennifer Lee</td>
             <td>Alan Jones</td>
@@ -226,6 +246,7 @@
           <tr>
             <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Professional Engineer Application</td>
+            <td>Maintenance/Update</td>
             <td>Task 1 of 1</td>
             <td>David Brown</td>
             <td>Sarah Johnson</td>
@@ -444,6 +465,8 @@
     var triggerText = trigger.querySelector('.multiselect-trigger-text');
     var checkboxes = panel.querySelectorAll('.column-checkbox');
     var table = document.getElementById('open-queue-table');
+    var filterInput = document.getElementById('column-filter-input');
+    var options = panel.querySelectorAll('.multiselect-option');
 
     function updateTriggerText() {
       var total = checkboxes.length;
@@ -453,11 +476,32 @@
       else triggerText.textContent = selected + ' of ' + total + ' Columns';
     }
 
+    function setColumnVisibility(columnIndex, isChecked) {
+      var headers = table.querySelectorAll('thead th');
+      if (headers[columnIndex]) headers[columnIndex].style.display = isChecked ? '' : 'none';
+
+      table.querySelectorAll('tbody tr').forEach(function (row) {
+        var cells = row.querySelectorAll('td');
+        if (cells[columnIndex]) cells[columnIndex].style.display = isChecked ? '' : 'none';
+      });
+    }
+
+    // Apply each checkbox's default checked state on load (e.g. Application Type starts off)
+    checkboxes.forEach(function (checkbox) {
+      setColumnVisibility(parseInt(checkbox.dataset.column, 10), checkbox.checked);
+    });
+    updateTriggerText();
+
     trigger.addEventListener('click', function (e) {
       e.stopPropagation();
       var expanded = trigger.getAttribute('aria-expanded') === 'true';
       trigger.setAttribute('aria-expanded', String(!expanded));
       panel.hidden = expanded;
+      if (!expanded) {
+        filterInput.value = '';
+        options.forEach(function (option) { option.style.display = ''; });
+        filterInput.focus();
+      }
     });
 
     panel.addEventListener('click', function (e) { e.stopPropagation(); });
@@ -469,19 +513,17 @@
       }
     });
 
+    filterInput.addEventListener('input', function () {
+      var query = this.value.trim().toLowerCase();
+      options.forEach(function (option) {
+        var label = option.querySelector('span').textContent.toLowerCase();
+        option.style.display = label.indexOf(query) === -1 ? 'none' : '';
+      });
+    });
+
     checkboxes.forEach(function (checkbox) {
       checkbox.addEventListener('change', function () {
-        var columnIndex = parseInt(this.dataset.column, 10);
-        var isChecked = this.checked;
-
-        var headers = table.querySelectorAll('thead th');
-        if (headers[columnIndex]) headers[columnIndex].style.display = isChecked ? '' : 'none';
-
-        table.querySelectorAll('tbody tr').forEach(function (row) {
-          var cells = row.querySelectorAll('td');
-          if (cells[columnIndex]) cells[columnIndex].style.display = isChecked ? '' : 'none';
-        });
-
+        setColumnVisibility(parseInt(this.dataset.column, 10), this.checked);
         updateTriggerText();
       });
     });

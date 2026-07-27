@@ -888,6 +888,10 @@ button {
   gap: 6px;
 }
 
+.field--full {
+  grid-column: 1 / -1;
+}
+
 .field label {
   font-size: 16px;
   font-weight: 600;
@@ -1035,6 +1039,8 @@ button {
 }
 
 .multiselect-trigger-text {
+  flex: 1 1 auto;
+  min-width: 0;
   color: var(--c-text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1066,6 +1072,24 @@ button {
   padding: 8px;
   max-height: 280px;
   overflow: auto;
+}
+
+.multiselect-filter {
+  width: 100%;
+  height: 36px;
+  border: 1px solid #c9ccd0;
+  border-radius: var(--r-pill);
+  padding: 0 12px;
+  margin-bottom: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--c-text-primary);
+}
+
+.multiselect-filter:focus-visible {
+  outline: none;
+  border-color: var(--c-blue);
+  box-shadow: 0 0 0 1px var(--c-blue);
 }
 
 .multiselect-option {
