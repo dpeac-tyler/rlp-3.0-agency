@@ -35,6 +35,7 @@
   // Catalog keys that map to a real page. Add an entry here as more screens are built.
   var PAGE_LINKS = {
     home: 'index.html',
+    tasks: 'my-tasks.html',
     queues: 'queues.html',
   };
 

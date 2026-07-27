@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Tasks — RLP Agency Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header (shared chrome) -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html">
+      <img class="app-header__logo" src="assets/tyler-t.png" alt="Tenant logo">
+      <span class="app-header__brand-name">Name of Tenant</span>
+    </a>
+    <nav class="app-header__links" aria-label="Account">
+      <a href="settings.html">Settings</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="search.html">Search</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Help</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Customizable toolbar (shared chrome, rendered by js/toolbar.js) -->
+  <div id="toolbar"></div>
+
+  <!-- Page content -->
+  <main class="page-body">
+
+    <ol class="breadcrumb" aria-label="Breadcrumb">
+      <li class="breadcrumb__item"><a href="my-tasks.html">My Tasks</a></li>
+      <li class="breadcrumb__item"><span class="breadcrumb__current">Pending Tasks</span></li>
+    </ol>
+
+    <h1 class="page-title">Pending Tasks</h1>
+
+    <div class="accordion">
+      <button type="button" class="accordion__button" id="icon-key-button" aria-expanded="false" aria-controls="icon-key-content">
+        Icon Key
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="accordion__content" id="icon-key-content" hidden>
+        <div class="accordion__content-label">Options and Control Types</div>
+        <div class="icon-key-grid">
+          <div class="icon-key-item"><img src="assets/eye-icon.png" alt=""> View Task</div>
+        </div>
+      </div>
+    </div>
+
+    <form style="margin-top: 24px" onsubmit="return false;">
+      <div class="field-grid">
+        <div class="field">
+          <label for="application-title">Application Title</label>
+          <select id="application-title" name="application-title">
+            <option value="">Please Select</option>
+            <option value="professional-engineer">Professional Engineer License</option>
+            <option value="contractor-renewal">Contractor License Renewal</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-name">Task Name</label>
+          <select id="task-name" name="task-name">
+            <option value="">Please Select</option>
+            <option value="review-applications">Review Applications</option>
+            <option value="verify-documents">Verify Documents</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="constituent-name">Constituent Name</label>
+          <input type="text" id="constituent-name" name="constituent-name">
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label for="submitted-by">Submitted By</label>
+          <input type="text" id="submitted-by" name="submitted-by">
+        </div>
+        <div class="field">
+          <label for="submitted-date">Submitted Date</label>
+          <input type="date" id="submitted-date" name="submitted-date">
+        </div>
+        <div class="field">
+          <label for="claimed-date">Claimed Date</label>
+          <input type="date" id="claimed-date" name="claimed-date">
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label for="user-group">User Group</label>
+          <select id="user-group" name="user-group">
+            <option value="">Please Select</option>
+            <option value="license-reviewers">License Reviewers</option>
+            <option value="application-processors">Application Processors</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn--primary">Search</button>
+        <button type="button" class="btn btn--secondary" id="clear-search">Clear</button>
+      </div>
+    </form>
+
+    <div style="margin-top: 32px">
+      <div class="table-controls">
+        <div class="table-controls__count">Showing 1 - 5 of 5 Entries</div>
+        <div class="table-controls__right">
+          <label for="tasks-column-select-button">Columns</label>
+          <div class="multiselect table-controls__column-select">
+            <button type="button" class="multiselect-trigger" id="tasks-column-select-button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="multiselect-trigger-text">All Columns</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="multiselect-panel" id="tasks-column-select-panel" hidden>
+              <input type="text" class="multiselect-filter" id="tasks-column-filter-input" placeholder="Filter columns…" autocomplete="off">
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="0" checked><span>Application Title</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="1" checked><span>Task Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="2" checked><span>Constituent Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="3" checked><span>Submitted By</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="4" checked><span>Submitted Date</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="5" checked><span>Claimed Date</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="6" checked><span>User Group</span></label>
+            </div>
+          </div>
+          <label for="entries-per-page-tasks">Show</label>
+          <select id="entries-per-page-tasks">
+            <option value="100" selected>100</option>
+            <option value="50">50</option>
+            <option value="25">25</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <table class="data-table" id="my-tasks-table">
+        <thead>
+          <tr>
+            <th>Application Title <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Task Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Constituent Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submitted By <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submitted Date <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Claimed Date <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>User Group <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Controls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Professional Engineer License</td>
+            <td>Task 1 of 1</td>
+            <td>John Smith</td>
+            <td>Sarah Johnson</td>
+            <td>03/15/2026</td>
+            <td>03/18/2026</td>
+            <td>License Reviewers</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=1" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Contractor License Renewal</td>
+            <td>Task 1 of 2</td>
+            <td>Maria Garcia</td>
+            <td>Michael Chen</td>
+            <td>03/16/2026</td>
+            <td>03/19/2026</td>
+            <td>Application Processors</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=2" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Professional Engineer License</td>
+            <td>Task 1 of 1</td>
+            <td>Robert Williams</td>
+            <td>Sarah Johnson</td>
+            <td>03/17/2026</td>
+            <td>03/20/2026</td>
+            <td>License Reviewers</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=3" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Contractor License Renewal</td>
+            <td>Task 2 of 2</td>
+            <td>Jennifer Lee</td>
+            <td>Michael Chen</td>
+            <td>03/18/2026</td>
+            <td>03/21/2026</td>
+            <td>License Reviewers</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=4" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Professional Engineer License</td>
+            <td>Task 1 of 1</td>
+            <td>David Brown</td>
+            <td>Sarah Johnson</td>
+            <td>03/19/2026</td>
+            <td>03/22/2026</td>
+            <td>Application Processors</td>
+            <td class="controls-cell">
+              <a href="task-detail.html?id=5" class="icon-btn" aria-label="View Task"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav aria-label="Pagination">
+        <ul class="pagination">
+          <li><a href="#" class="pagination__arrow" aria-label="Previous page">‹ Previous</a></li>
+          <li><a href="#" class="is-current" aria-label="Page 1" aria-current="page">1</a></li>
+          <li><a href="#" class="pagination__arrow" aria-label="Next page">Next ›</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="js/toolbar.js"></script>
+<script src="js/column-select.js"></script>
+<script>
+  initToolbar('#toolbar', { activeKey: 'tasks' });
+
+  // Icon Key accordion
+  (function () {
+    var button = document.getElementById('icon-key-button');
+    var content = document.getElementById('icon-key-content');
+    button.addEventListener('click', function () {
+      var expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      content.hidden = expanded;
+    });
+  })();
+
+  document.getElementById('clear-search').addEventListener('click', function () {
+    document.querySelectorAll('input[type="text"], input[type="date"]').forEach(function (input) { input.value = ''; });
+    document.querySelectorAll('#application-title, #task-name, #user-group').forEach(function (select) { select.selectedIndex = 0; });
+  });
+
+  // Column visibility multiselect (My Tasks table)
+  initColumnSelect({
+    triggerId: 'tasks-column-select-button',
+    panelId: 'tasks-column-select-panel',
+    filterId: 'tasks-column-filter-input',
+    tableId: 'my-tasks-table',
+  });
+</script>
+
+</body>
+</html>

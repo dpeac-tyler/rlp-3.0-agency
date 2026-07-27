@@ -888,10 +888,6 @@ button {
   gap: 6px;
 }
 
-.field--full {
-  grid-column: 1 / -1;
-}
-
 .field label {
   font-size: 16px;
   font-weight: 600;
@@ -1041,6 +1037,7 @@ button {
 .multiselect-trigger-text {
   flex: 1 1 auto;
   min-width: 0;
+  text-align: left;
   color: var(--c-text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
