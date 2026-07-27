@@ -125,9 +125,28 @@
 
     <!-- Open view -->
     <div id="open-view" style="margin-top: 32px">
+      <div style="margin-bottom: 16px">
+        <button type="button" class="btn btn--primary" id="claim-selected-btn">Claim Selected</button>
+      </div>
+
       <div class="table-controls">
         <div class="table-controls__count">Showing 1 - 5 of 5 Entries</div>
         <div class="table-controls__right">
+          <label for="column-select-button">Columns</label>
+          <div class="multiselect table-controls__column-select">
+            <button type="button" class="multiselect-trigger" id="column-select-button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="multiselect-trigger-text">All Columns</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="multiselect-panel" id="column-select-panel" hidden>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="1" checked><span>Application Title</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="2" checked><span>Task Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="3" checked><span>Constituent Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="4" checked><span>Submitted By</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="5" checked><span>Submitted Date</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="6" checked><span>User Group</span></label>
+            </div>
+          </div>
           <label for="open-entries-per-page">Show</label>
           <select id="open-entries-per-page">
             <option value="100" selected>100</option>
@@ -138,9 +157,10 @@
         </div>
       </div>
 
-      <table class="data-table">
+      <table class="data-table" id="open-queue-table">
         <thead>
           <tr>
+            <th class="select-column"><input type="checkbox" id="select-all-open" aria-label="Select all rows"></th>
             <th>Application Title <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
             <th>Task Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
             <th>Constituent Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
@@ -152,6 +172,7 @@
         </thead>
         <tbody>
           <tr>
+            <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Business Application 123</td>
             <td>Task 1 of 1</td>
             <td>John Smith</td>
@@ -164,6 +185,7 @@
             </td>
           </tr>
           <tr>
+            <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Professional Engineer Application</td>
             <td>Task 1 of 2</td>
             <td>Maria Garcia</td>
@@ -176,6 +198,7 @@
             </td>
           </tr>
           <tr>
+            <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Contractor License Renewal</td>
             <td>Task 1 of 1</td>
             <td>Robert Williams</td>
@@ -188,6 +211,7 @@
             </td>
           </tr>
           <tr>
+            <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Business Application 456</td>
             <td>Task 2 of 2</td>
             <td>Jennifer Lee</td>
@@ -200,6 +224,7 @@
             </td>
           </tr>
           <tr>
+            <td class="select-cell"><input type="checkbox" class="row-select" aria-label="Select row"></td>
             <td>Professional Engineer Application</td>
             <td>Task 1 of 1</td>
             <td>David Brown</td>
@@ -409,6 +434,72 @@
     document.getElementById('clear-search').addEventListener('click', function () {
       checkboxes.forEach(function (cb) { cb.checked = false; });
       updateTriggerText();
+    });
+  })();
+
+  // Column visibility multiselect (Open table)
+  (function () {
+    var trigger = document.getElementById('column-select-button');
+    var panel = document.getElementById('column-select-panel');
+    var triggerText = trigger.querySelector('.multiselect-trigger-text');
+    var checkboxes = panel.querySelectorAll('.column-checkbox');
+    var table = document.getElementById('open-queue-table');
+
+    function updateTriggerText() {
+      var total = checkboxes.length;
+      var selected = Array.prototype.filter.call(checkboxes, function (cb) { return cb.checked; }).length;
+      if (selected === total) triggerText.textContent = 'All Columns';
+      else if (selected === 0) triggerText.textContent = 'No Columns';
+      else triggerText.textContent = selected + ' of ' + total + ' Columns';
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+    });
+
+    panel.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    document.addEventListener('click', function (e) {
+      if (!trigger.contains(e.target) && !panel.contains(e.target)) {
+        trigger.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+      }
+    });
+
+    checkboxes.forEach(function (checkbox) {
+      checkbox.addEventListener('change', function () {
+        var columnIndex = parseInt(this.dataset.column, 10);
+        var isChecked = this.checked;
+
+        var headers = table.querySelectorAll('thead th');
+        if (headers[columnIndex]) headers[columnIndex].style.display = isChecked ? '' : 'none';
+
+        table.querySelectorAll('tbody tr').forEach(function (row) {
+          var cells = row.querySelectorAll('td');
+          if (cells[columnIndex]) cells[columnIndex].style.display = isChecked ? '' : 'none';
+        });
+
+        updateTriggerText();
+      });
+    });
+  })();
+
+  // Select all / row selection (Open table)
+  (function () {
+    var selectAll = document.getElementById('select-all-open');
+    var rowCheckboxes = document.querySelectorAll('#open-queue-table .row-select');
+
+    selectAll.addEventListener('change', function () {
+      rowCheckboxes.forEach(function (cb) { cb.checked = selectAll.checked; });
+    });
+
+    rowCheckboxes.forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        selectAll.checked = Array.prototype.every.call(rowCheckboxes, function (c) { return c.checked; });
+      });
     });
   })();
 

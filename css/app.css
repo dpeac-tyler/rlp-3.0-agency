@@ -1111,6 +1111,15 @@ button {
   color: var(--c-text-secondary);
 }
 
+.table-controls__column-select {
+  width: 220px;
+}
+
+.table-controls__right .multiselect-trigger {
+  height: 36px;
+  padding: 0 10px;
+}
+
 .table-controls__right select {
   height: 36px;
   border: 1px solid #c9ccd0;
@@ -1160,6 +1169,21 @@ button {
 
 .data-table .controls-cell {
   white-space: nowrap;
+}
+
+.data-table .select-column,
+.data-table .select-cell {
+  width: 20px;
+  white-space: nowrap;
+}
+
+.data-table .select-column input[type="checkbox"],
+.data-table .select-cell input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: var(--c-blue);
+  cursor: pointer;
 }
 
 /* Status text — fixed 8-color palette. Weight stays normal; color alone carries the meaning. */
