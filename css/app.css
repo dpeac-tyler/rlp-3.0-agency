@@ -888,6 +888,10 @@ button {
   gap: 6px;
 }
 
+.field[hidden] {
+  display: none;
+}
+
 .field label {
   font-size: 16px;
   font-weight: 600;
@@ -921,6 +925,7 @@ button {
 
 .field-required {
   font-size: 16px;
+  font-weight: 400;
   font-style: italic;
   color: var(--c-text-primary);
   margin-left: 6px;
@@ -970,6 +975,34 @@ button {
   margin: 0;
 }
 
+.checkbox-option__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: var(--c-text-primary);
+  cursor: pointer;
+}
+
+.checkbox-option__label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--c-blue);
+  margin: 0;
+}
+
+.badge {
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 2px 9px;
+}
+
+.badge--gold {
+  background: var(--c-gold);
+  color: var(--c-gold-text);
+}
+
 .form-actions {
   display: flex;
   gap: 12px;
@@ -1005,6 +1038,15 @@ button {
 
 .btn--secondary:hover {
   border-color: #9ea3a8;
+}
+
+.btn--cancel {
+  background: #d54309;
+  color: #fff;
+}
+
+.btn--cancel:hover {
+  background: #b50909;
 }
 
 /* Multiselect dropdown (User Group, etc.) */

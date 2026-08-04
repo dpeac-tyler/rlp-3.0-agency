@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create New User — RLP Agency Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header (shared chrome) -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html">
+      <img class="app-header__logo" src="assets/tyler-t.png" alt="Tenant logo">
+      <span class="app-header__brand-name">Name of Agency</span>
+    </a>
+    <nav class="app-header__links" aria-label="Account">
+      <a href="settings.html">Settings</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="search.html">Search</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Help</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Customizable toolbar (shared chrome, rendered by js/toolbar.js) -->
+  <div id="toolbar"></div>
+
+  <!-- Page content -->
+  <main class="page-body">
+
+    <ol class="breadcrumb" aria-label="Breadcrumb">
+      <li class="breadcrumb__item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb__item"><span class="breadcrumb__current">Create New User</span></li>
+    </ol>
+
+    <h1 class="page-title">Create New User</h1>
+
+    <p class="help-text" style="margin-top: 16px">Please provide the required information to create an account then click Submit.</p>
+
+    <form style="margin-top: 24px" onsubmit="return false;">
+      <fieldset class="fieldset">
+        <legend>Account Type <span class="field-required">Required</span></legend>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="account-type" value="personal" checked> Personal Account</label>
+          <label class="radio-option"><input type="radio" name="account-type" value="business"> Business Account</label>
+        </div>
+      </fieldset>
+
+      <div class="field" style="margin-top: 24px">
+        <label for="email-address">Email Address <span class="field-required">Required</span></label>
+        <input type="text" id="email-address" name="email-address">
+      </div>
+
+      <div class="field" style="margin-top: 20px">
+        <label for="confirm-email-address">Confirm Email Address <span class="field-required">Required</span></label>
+        <input type="text" id="confirm-email-address" name="confirm-email-address">
+      </div>
+
+      <div class="checkbox-option" style="margin-top: 20px">
+        <label class="checkbox-option__label">
+          <input type="checkbox" id="use-email-as-username" name="use-email-as-username" checked>
+          Check this to use Email Address as Username
+          <span class="badge badge--gold">Recommended</span>
+        </label>
+      </div>
+
+      <div class="accordion" id="username-accordion" style="margin-top: 20px" hidden>
+        <button type="button" class="accordion__button" id="username-requirements-button" aria-expanded="true" aria-controls="username-requirements-content">
+          Username Requirements
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="accordion__content" id="username-requirements-content">
+          <p class="help-text">Maximum of 128 characters</p>
+          <p class="help-text">Supports the following characters: -:_=.+@</p>
+        </div>
+      </div>
+
+      <div class="field" id="username-field" style="margin-top: 20px" hidden>
+        <label for="username">Username <span class="field-required">Required</span></label>
+        <input type="text" id="username" name="username">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn--primary">Submit</button>
+        <button type="button" class="btn btn--cancel" onclick="window.location.href='index.html'">Cancel</button>
+      </div>
+    </form>
+
+  </main>
+
+</div>
+
+<script src="js/toolbar.js"></script>
+<script>
+  initToolbar('#toolbar', { activeKey: null });
+
+  // Reveal the Username requirements accordion + field when "use email as username" is unchecked
+  var useEmailAsUsername = document.getElementById('use-email-as-username');
+  var usernameAccordion = document.getElementById('username-accordion');
+  var usernameField = document.getElementById('username-field');
+  function toggleUsernameSection() {
+    var show = !useEmailAsUsername.checked;
+    usernameAccordion.hidden = !show;
+    usernameField.hidden = !show;
+  }
+  useEmailAsUsername.addEventListener('change', toggleUsernameSection);
+  toggleUsernameSection();
+
+  // Username Requirements accordion (open by default, still collapsible)
+  (function () {
+    var button = document.getElementById('username-requirements-button');
+    var content = document.getElementById('username-requirements-content');
+    button.addEventListener('click', function () {
+      var expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      content.hidden = expanded;
+    });
+  })();
+</script>
+
+</body>
+</html>
