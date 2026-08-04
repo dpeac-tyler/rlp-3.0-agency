@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>License Types — RLP Agency Console</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Header (shared chrome) -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html">
+      <img class="app-header__logo" src="assets/tyler-t.png" alt="Tenant logo">
+      <span class="app-header__brand-name">Name of Agency</span>
+    </a>
+    <nav class="app-header__links" aria-label="Account">
+      <a href="settings.html">Settings</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="search.html">Search</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Help</a>
+      <span class="app-header__divider" aria-hidden="true">|</span>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Customizable toolbar (shared chrome, rendered by js/toolbar.js) -->
+  <div id="toolbar"></div>
+
+  <!-- Page content -->
+  <main class="page-body">
+
+    <ol class="breadcrumb" aria-label="Breadcrumb">
+      <li class="breadcrumb__item"><a href="license-types.html">License Types</a></li>
+      <li class="breadcrumb__item"><span class="breadcrumb__current">All License Types</span></li>
+    </ol>
+
+    <h1 class="page-title">All License Types</h1>
+
+    <div class="search-panel" style="margin-top: 16px">
+      <div class="search-panel__top">
+        <div class="search-toggle" role="group" aria-label="Search type">
+          <button type="button" class="search-toggle__segment is-active" data-search-type="constituent">Constituent</button>
+          <button type="button" class="search-toggle__segment" data-search-type="invoice">Invoice</button>
+          <button type="button" class="search-toggle__segment" data-search-type="license">License</button>
+          <button type="button" class="search-toggle__segment" data-search-type="submission">Submission</button>
+        </div>
+        <a class="search-advanced" href="#">Advanced search <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
+      </div>
+      <form class="search-field-row" action="#" onsubmit="return false;">
+        <label class="search-box" for="global-search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="text" id="global-search" placeholder="Last name, first name, business, DBA, license #, or email…">
+          <span class="search-kbd" aria-hidden="true">⌘K</span>
+        </label>
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+    </div>
+
+    <div class="accordion" style="margin-top: 20px">
+      <button type="button" class="accordion__button" id="icon-key-button" aria-expanded="false" aria-controls="icon-key-content">
+        Icon Key
+        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="accordion__content" id="icon-key-content" hidden>
+        <div class="accordion__content-label">Options and Control Types</div>
+        <div class="icon-key-grid">
+          <div class="icon-key-item"><img src="assets/edit-icon.png" alt=""> Edit License Type</div>
+          <div class="icon-key-item"><img src="assets/eye-icon.png" alt=""> View License Type</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px">
+      <a href="#" class="btn btn--primary">Create New License</a>
+    </div>
+
+    <div style="margin-top: 24px">
+      <div class="table-controls">
+        <div class="table-controls__count">Showing 1 - 5 of 5 Entries</div>
+        <div class="table-controls__right">
+          <label for="license-types-column-select-button">Columns</label>
+          <div class="multiselect table-controls__column-select">
+            <button type="button" class="multiselect-trigger" id="license-types-column-select-button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="multiselect-trigger-text">All Columns</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="multiselect-panel" id="license-types-column-select-panel" hidden>
+              <input type="text" class="multiselect-filter" id="license-types-column-filter-input" placeholder="Filter columns…" autocomplete="off">
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="0" checked><span>Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="1" checked><span>Display Name</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="2" checked><span>Submitter Type</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="3" checked><span>Application Types</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="4" checked><span>Modified By</span></label>
+              <label class="multiselect-option"><input type="checkbox" class="column-checkbox" data-column="5" checked><span>Modified Date</span></label>
+            </div>
+          </div>
+          <label for="entries-per-page-license-types">Show</label>
+          <select id="entries-per-page-license-types">
+            <option value="100" selected>100</option>
+            <option value="50">50</option>
+            <option value="25">25</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <table class="data-table" id="license-types-table">
+        <thead>
+          <tr>
+            <th>Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Display Name <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Submitter Type <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Application Types <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Modified By <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Modified Date <i class="fa-solid fa-sort" aria-hidden="true"></i></th>
+            <th>Controls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Firearm Business License</td>
+            <td>New Firearm Business License</td>
+            <td>Business</td>
+            <td>Original, Renewal, Maintenance/Update</td>
+            <td>Admin User</td>
+            <td>07/29/2026</td>
+            <td class="controls-cell">
+              <a href="#" class="icon-btn" aria-label="Edit License Type"><img src="assets/edit-icon.png" alt="" width="30" height="30"></a>
+              <a href="#" class="icon-btn" aria-label="View License Type"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Contractor License</td>
+            <td>New Contractor License</td>
+            <td>Business</td>
+            <td>Original, Renewal</td>
+            <td>Sarah Johnson</td>
+            <td>07/30/2026</td>
+            <td class="controls-cell">
+              <a href="#" class="icon-btn" aria-label="Edit License Type"><img src="assets/edit-icon.png" alt="" width="30" height="30"></a>
+              <a href="#" class="icon-btn" aria-label="View License Type"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Professional Engineer License</td>
+            <td>New Professional Engineer License</td>
+            <td>Individual</td>
+            <td>Original, Renewal, Reinstatement</td>
+            <td>Michael Chen</td>
+            <td>08/01/2026</td>
+            <td class="controls-cell">
+              <a href="#" class="icon-btn" aria-label="Edit License Type"><img src="assets/edit-icon.png" alt="" width="30" height="30"></a>
+              <a href="#" class="icon-btn" aria-label="View License Type"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Cosmetology License</td>
+            <td>New Cosmetology License</td>
+            <td>Individual</td>
+            <td>Original, Renewal</td>
+            <td>Jennifer Williams</td>
+            <td>08/02/2026</td>
+            <td class="controls-cell">
+              <a href="#" class="icon-btn" aria-label="Edit License Type"><img src="assets/edit-icon.png" alt="" width="30" height="30"></a>
+              <a href="#" class="icon-btn" aria-label="View License Type"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>Liquor License</td>
+            <td>New Liquor License</td>
+            <td>Business</td>
+            <td>Original, Renewal, Transfer</td>
+            <td>David Martinez</td>
+            <td>08/03/2026</td>
+            <td class="controls-cell">
+              <a href="#" class="icon-btn" aria-label="Edit License Type"><img src="assets/edit-icon.png" alt="" width="30" height="30"></a>
+              <a href="#" class="icon-btn" aria-label="View License Type"><img src="assets/eye-icon.png" alt="" width="30" height="30"></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav aria-label="Pagination">
+        <ul class="pagination">
+          <li><a href="#" class="pagination__arrow" aria-label="Previous page">‹ Previous</a></li>
+          <li><a href="#" class="is-current" aria-label="Page 1" aria-current="page">1</a></li>
+          <li><a href="#" class="pagination__arrow" aria-label="Next page">Next ›</a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="js/toolbar.js"></script>
+<script src="js/column-select.js"></script>
+<script>
+  initToolbar('#toolbar', { activeKey: 'licenses' });
+
+  // Search type segmented control
+  document.querySelectorAll('.search-toggle__segment').forEach(function (segment) {
+    segment.addEventListener('click', function () {
+      document.querySelectorAll('.search-toggle__segment').forEach(function (s) {
+        s.classList.remove('is-active');
+      });
+      segment.classList.add('is-active');
+    });
+  });
+
+  // Icon Key accordion
+  (function () {
+    var button = document.getElementById('icon-key-button');
+    var content = document.getElementById('icon-key-content');
+    button.addEventListener('click', function () {
+      var expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      content.hidden = expanded;
+    });
+  })();
+
+  // Column visibility multiselect (License Types table)
+  initColumnSelect({
+    triggerId: 'license-types-column-select-button',
+    panelId: 'license-types-column-select-panel',
+    filterId: 'license-types-column-filter-input',
+    tableId: 'license-types-table',
+  });
+</script>
+
+</body>
+</html>

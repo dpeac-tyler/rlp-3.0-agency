@@ -37,6 +37,7 @@
     home: 'index.html',
     tasks: 'my-tasks.html',
     queues: 'queues.html',
+    licenses: 'license-types.html',
   };
 
   function loadPersisted() {
